@@ -54,13 +54,13 @@ app_localizations_es.dart ← GENERADO
 
 ---
 
-## Phase 3: Script helper para agregar strings nuevos [ ]
+## Phase 3: Script helper para agregar strings nuevos [✓]
 
 > Crear un script `scripts/add_l10n.sh` que automatice agregar una clave nueva a ambos `.arb`
 > a la vez y regenere los Dart.
 
-- [ ] 1. Crear el directorio `scripts/`.
-- [ ] 2. Escribir `scripts/add_l10n.sh` con la siguiente interfaz:
+- [✓] 1. Crear el directorio `scripts/`.
+- [✓] 2. Escribir `scripts/add_l10n.sh` con la siguiente interfaz:
          ```bash
          ./scripts/add_l10n.sh <key> "<en_value>" "<es_value>"
          # Ejemplo:
@@ -70,9 +70,9 @@ app_localizations_es.dart ← GENERADO
          - Insertar la clave antes del último `}` en ambos `.arb`.
          - Ejecutar `flutter gen-l10n`.
          - Imprimir un resumen de lo agregado.
-- [ ] 3. Darle permisos de ejecución: `chmod +x scripts/add_l10n.sh`.
-- [ ] 4. Probar el script agregando una clave de prueba y verificando que los Dart se actualizan.
-- [ ] 5. Eliminar la clave de prueba.
+- [✓] 3. Darle permisos de ejecución: `chmod +x scripts/add_l10n.sh`.
+- [✓] 4. Probar el script agregando una clave de prueba y verificando que los Dart se actualizan.
+- [✓] 5. Eliminar la clave de prueba.
 
 ---
 
