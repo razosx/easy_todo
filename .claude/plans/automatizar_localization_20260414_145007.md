@@ -76,12 +76,12 @@ app_localizations_es.dart ← GENERADO
 
 ---
 
-## Phase 4: Makefile con targets de localización [ ]
+## Phase 4: Makefile con targets de localización [✓]
 
 > Exponer comandos simples en un `Makefile` para que cualquier desarrollador pueda regenerar
 > o verificar las traducciones con un solo comando.
 
-- [ ] 1. Crear (o actualizar) el `Makefile` en la raíz del proyecto con los targets:
+- [✓] 1. Crear (o actualizar) el `Makefile` en la raíz del proyecto con los targets:
 
   ```makefile
   # Regenerar archivos Dart desde los .arb
@@ -97,7 +97,7 @@ app_localizations_es.dart ← GENERADO
       ./scripts/add_l10n.sh $(KEY) "$(EN)" "$(ES)"
   ```
 
-- [ ] 2. Documentar los targets en el README bajo una sección "Localization".
+- [✓] 2. Documentar los targets en el README bajo una sección "Localization".
 
 ---
 
