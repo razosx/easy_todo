@@ -1,3 +1,5 @@
+// GENERATED — do not edit by hand.
+// Run 'flutter gen-l10n' or 'make l10n' to regenerate.
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -170,18 +172,6 @@ abstract class AppLocalizations {
   /// **'Password must be at least 6 characters'**
   String get passwordTooShortError;
 
-  /// No description provided for @signUpButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Create account'**
-  String get signUpButton;
-
-  /// No description provided for @signInButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in'**
-  String get signInButton;
-
   /// No description provided for @nameLabel.
   ///
   /// In en, this message translates to:
@@ -235,6 +225,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Username already taken'**
   String get usernameTaken;
+
+  /// No description provided for @signUpButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get signUpButton;
+
+  /// No description provided for @signInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get signInButton;
 
   /// No description provided for @continueWithGoogle.
   ///

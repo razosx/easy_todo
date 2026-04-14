@@ -1,3 +1,6 @@
+// GENERATED — do not edit by hand.
+// Run 'flutter gen-l10n' or 'make l10n' to regenerate.
+
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';
@@ -45,12 +48,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordTooShortError => 'Password must be at least 6 characters';
 
   @override
-  String get signUpButton => 'Create account';
-
-  @override
-  String get signInButton => 'Sign in';
-
-  @override
   String get nameLabel => 'Name';
 
   @override
@@ -76,6 +73,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get usernameTaken => 'Username already taken';
+
+  @override
+  String get signUpButton => 'Create account';
+
+  @override
+  String get signInButton => 'Sign in';
 
   @override
   String get continueWithGoogle => 'Continue with Google';

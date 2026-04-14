@@ -1,0 +1,2 @@
+# Generated Flutter localization files — exclude from GitHub diffs
+lib/l10n/app_localizations*.dart linguist-generated=true

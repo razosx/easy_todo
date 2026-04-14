@@ -1,35 +1,38 @@
 {
   "@@locale": "es",
-
   "appTitle": "Easy Todo",
-
   "loginWelcomeBack": "Bienvenido de vuelta",
   "loginCreateAccount": "Crea tu cuenta",
   "loginHaveAccount": "¿Ya tienes cuenta? Inicia sesión",
   "loginNoAccount": "¿No tienes cuenta? Regístrate",
   "loginOr": "o",
-
   "emailLabel": "Correo electrónico",
   "passwordLabel": "Contraseña",
   "emailEmptyError": "Ingresa tu correo",
   "emailInvalidError": "Ingresa un correo válido",
   "passwordEmptyError": "Ingresa tu contraseña",
   "passwordTooShortError": "La contraseña debe tener al menos 6 caracteres",
+  "nameLabel": "Nombre",
+  "nameEmptyError": "Ingresa tu nombre",
+  "usernameLabel": "Nombre de usuario",
+  "usernameEmptyError": "Ingresa un nombre de usuario",
+  "usernameTooShortError": "El nombre de usuario debe tener al menos 3 caracteres",
+  "usernameInvalidError": "Solo letras, números y guiones bajos",
+  "usernameChecking": "Verificando...",
+  "usernameAvailable": "Disponible",
+  "usernameTaken": "Nombre de usuario no disponible",
   "signUpButton": "Crear cuenta",
   "signInButton": "Iniciar sesión",
   "continueWithGoogle": "Continuar con Google",
-
   "homeTitle": "Mis Tareas",
   "homeSectionToday": "HOY",
   "homeSectionUpcoming": "SIGUIENTES",
   "homeSectionCompleted": "COMPLETADAS",
   "homeEmptyTitle": "No tienes tareas pendientes",
   "homeEmptySubtitle": "Toca + para agregar una nueva tarea",
-
   "navHome": "Inicio",
   "navTeam": "Equipo",
   "navSettings": "Config",
-
   "taskTitleLabel": "Título *",
   "taskDescriptionLabel": "Descripción (opcional)",
   "taskPriorityLabel": "Prioridad",
@@ -41,23 +44,25 @@
   "taskNotificationAt": "Notificación a las {time}",
   "@taskNotificationAt": {
     "placeholders": {
-      "time": { "type": "String" }
+      "time": {
+        "type": "String"
+      }
     }
   },
   "addTaskButton": "Agregar tarea",
   "taskTitleRequired": "El título es obligatorio",
-
   "deleteTaskTitle": "Eliminar tarea",
   "deleteTaskConfirm": "¿Eliminar \"{taskTitle}\"?",
   "@deleteTaskConfirm": {
     "placeholders": {
-      "taskTitle": { "type": "String" }
+      "taskTitle": {
+        "type": "String"
+      }
     }
   },
   "cancelButton": "Cancelar",
   "deleteButton": "Eliminar",
   "closeButton": "Cerrar",
-
   "teamPageTitle": "Equipo",
   "teamNoTeamTitle": "No perteneces a ningún equipo",
   "teamNoTeamSubtitle": "Crea un equipo nuevo o únete con un código de invitación.",
@@ -81,13 +86,11 @@
   "teamLeaveConfirm": "¿Estás seguro de que quieres salir de este equipo?",
   "teamLeaveButton": "Salir",
   "teamAssignTooltip": "Asignar",
-
   "createTeamTitle": "Crear equipo",
   "createTeamDescription": "Crea un nuevo equipo y comparte el código de invitación con tus compañeros.",
   "createTeamNameLabel": "Nombre del equipo *",
   "createTeamNameRequired": "El nombre es obligatorio",
   "createTeamButton": "Crear equipo",
-
   "joinTeamTitle": "Unirse a un equipo",
   "joinTeamDescription": "Ingresa el código de 6 caracteres que te compartió el administrador del equipo.",
   "joinTeamCodeLabel": "Código de invitación *",
@@ -95,10 +98,8 @@
   "joinTeamCodeRequired": "El código es obligatorio",
   "joinTeamCodeLength": "El código debe tener 6 caracteres",
   "joinTeamButton": "Unirse al equipo",
-
   "addTeamTaskTitle": "Nueva tarea de equipo",
   "teamTaskAssignLabel": "Asignar a (opcional)",
-
   "settingsTitle": "Configuración",
   "settingsDefaultUser": "Usuario",
   "settingsNotificationsTitle": "Notificaciones locales",
@@ -112,13 +113,14 @@
   "settingsLanguageTitle": "Idioma",
   "settingsLogout": "Cerrar sesión",
   "settingsLogoutConfirm": "¿Estás seguro de que quieres cerrar sesión?",
-
   "notificationChannelName": "Easy Todo Notifications",
   "notificationChannelDescription": "Recordatorios de tareas pendientes",
   "notificationTitle": "Tarea pendiente: {taskTitle}",
   "@notificationTitle": {
     "placeholders": {
-      "taskTitle": { "type": "String" }
+      "taskTitle": {
+        "type": "String"
+      }
     }
   },
   "notificationDefaultBody": "Tienes una tarea por completar"

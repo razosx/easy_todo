@@ -113,7 +113,26 @@ feature/
 
 Supported languages: **English** (`en`) and **Spanish** (`es`).
 
-String resources live in `lib/l10n/app_en.arb` and `lib/l10n/app_es.arb`. After editing `.arb` files, the Dart files under `lib/l10n/` are regenerated automatically by the Flutter toolchain (configured in `l10n.yaml`).
+**The `.arb` files are the single source of truth.** Never edit the generated Dart files under `lib/l10n/` — they are stamped with a `// GENERATED` header and ignored in GitHub diffs via `.gitattributes`.
+
+### Workflow
+
+| Task | Command |
+|---|---|
+| Regenerate Dart files after editing `.arb` | `make l10n` |
+| Add a new string to both languages at once | `make l10n-add KEY=myKey EN="My value" ES="Mi valor"` |
+| Check that `en` and `es` are in sync | `make l10n-check` |
+
+### Adding a string manually
+
+1. Add the key to `lib/l10n/app_en.arb` and `lib/l10n/app_es.arb`.
+2. Run `make l10n` to regenerate.
+
+Or use the helper in one step:
+
+```bash
+./scripts/add_l10n.sh profileTitle "Profile" "Perfil"
+```
 
 ## Testing
 
