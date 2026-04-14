@@ -3,3 +3,4 @@ template-arb-file: app_en.arb
 output-localization-file: app_localizations.dart
 output-class: AppLocalizations
 preferred-supported-locales: [en, es]
+header: "// GENERATED — do not edit by hand.\n// Run 'flutter gen-l10n' or 'make l10n' to regenerate."

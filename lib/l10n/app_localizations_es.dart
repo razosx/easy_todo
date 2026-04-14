@@ -1,3 +1,6 @@
+// GENERATED — do not edit by hand.
+// Run 'flutter gen-l10n' or 'make l10n' to regenerate.
+
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
 import 'app_localizations.dart';

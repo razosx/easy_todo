@@ -1,3 +1,5 @@
+// GENERATED — do not edit by hand.
+// Run 'flutter gen-l10n' or 'make l10n' to regenerate.
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';

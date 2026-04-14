@@ -38,18 +38,18 @@ app_localizations_es.dart ← GENERADO
 
 ---
 
-## Phase 2: Agregar `// GENERATED` al encabezado de los Dart y protegerlos en `.gitattributes` [ ]
+## Phase 2: Agregar `// GENERATED` al encabezado de los Dart y protegerlos en `.gitattributes` [✓]
 
 > Marcar claramente que los Dart de l10n son generados y no deben editarse manualmente.
 
-- [ ] 1. Agregar `l10n.yaml` la opción `header: "// GENERATED — do not edit by hand."` para
+- [✓] 1. Agregar `l10n.yaml` la opción `header: "// GENERATED — do not edit by hand."` para
          que Flutter inserte el encabezado al regenerar.
-- [ ] 2. Agregar al `.gitattributes` una regla para que los archivos generados se marquen como
+- [✓] 2. Agregar al `.gitattributes` una regla para que los archivos generados se marquen como
          `linguist-generated=true` en GitHub y se excluyan de diffs por defecto:
          ```
          lib/l10n/app_localizations*.dart linguist-generated=true
          ```
-- [ ] 3. Verificar que `flutter gen-l10n` respeta el header y que el diff en GitHub omite los
+- [✓] 3. Verificar que `flutter gen-l10n` respeta el header y que el diff en GitHub omite los
          archivos generados.
 
 ---
