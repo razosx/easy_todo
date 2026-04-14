@@ -1,0 +1,125 @@
+{
+  "@@locale": "en",
+
+  "appTitle": "Easy Todo",
+
+  "loginWelcomeBack": "Welcome back",
+  "loginCreateAccount": "Create your account",
+  "loginHaveAccount": "Already have an account? Sign in",
+  "loginNoAccount": "Don't have an account? Sign up",
+  "loginOr": "or",
+
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "emailEmptyError": "Enter your email",
+  "emailInvalidError": "Enter a valid email",
+  "passwordEmptyError": "Enter your password",
+  "passwordTooShortError": "Password must be at least 6 characters",
+  "signUpButton": "Create account",
+  "signInButton": "Sign in",
+  "continueWithGoogle": "Continue with Google",
+
+  "homeTitle": "My Tasks",
+  "homeSectionToday": "TODAY",
+  "homeSectionUpcoming": "UPCOMING",
+  "homeSectionCompleted": "COMPLETED",
+  "homeEmptyTitle": "No pending tasks",
+  "homeEmptySubtitle": "Tap + to add a new task",
+
+  "navHome": "Home",
+  "navTeam": "Team",
+  "navSettings": "Settings",
+
+  "taskTitleLabel": "Title *",
+  "taskDescriptionLabel": "Description (optional)",
+  "taskPriorityLabel": "Priority",
+  "taskPriorityLow": "Low",
+  "taskPriorityMedium": "Medium",
+  "taskPriorityHigh": "High",
+  "taskNoDate": "No date",
+  "taskScheduleNotification": "Schedule notification",
+  "taskNotificationAt": "Notification at {time}",
+  "@taskNotificationAt": {
+    "placeholders": {
+      "time": { "type": "String" }
+    }
+  },
+  "addTaskButton": "Add task",
+  "taskTitleRequired": "Title is required",
+
+  "deleteTaskTitle": "Delete task",
+  "deleteTaskConfirm": "Delete \"{taskTitle}\"?",
+  "@deleteTaskConfirm": {
+    "placeholders": {
+      "taskTitle": { "type": "String" }
+    }
+  },
+  "cancelButton": "Cancel",
+  "deleteButton": "Delete",
+  "closeButton": "Close",
+
+  "teamPageTitle": "Team",
+  "teamNoTeamTitle": "You don't belong to any team",
+  "teamNoTeamSubtitle": "Create a new team or join with an invite code.",
+  "teamCreateButton": "Create team",
+  "teamJoinButton": "Join with code",
+  "teamEmptyTasksTitle": "No tasks in the team",
+  "teamEmptyTasksSubtitle": "Tap + to add the first task",
+  "teamSectionMyTasks": "MY TASKS",
+  "teamSectionUnassigned": "UNASSIGNED",
+  "teamSectionOthers": "OTHER MEMBERS",
+  "teamSectionCompleted": "COMPLETED",
+  "teamMenuInviteCode": "View invite code",
+  "teamMenuLeave": "Leave team",
+  "teamAssignTaskTitle": "Assign task",
+  "teamAssignUnassigned": "Unassigned",
+  "teamRoleAdmin": "Admin",
+  "teamAdminSuffix": " (admin)",
+  "teamInviteCodeTitle": "Invite code",
+  "teamInviteCodeDescription": "Share this code so others can join the team.",
+  "teamLeaveTitle": "Leave team",
+  "teamLeaveConfirm": "Are you sure you want to leave this team?",
+  "teamLeaveButton": "Leave",
+  "teamAssignTooltip": "Assign",
+
+  "createTeamTitle": "Create team",
+  "createTeamDescription": "Create a new team and share the invite code with your teammates.",
+  "createTeamNameLabel": "Team name *",
+  "createTeamNameRequired": "Name is required",
+  "createTeamButton": "Create team",
+
+  "joinTeamTitle": "Join a team",
+  "joinTeamDescription": "Enter the 6-character code shared by the team admin.",
+  "joinTeamCodeLabel": "Invite code *",
+  "joinTeamCodeHint": "E.g.: AB1C2D",
+  "joinTeamCodeRequired": "Code is required",
+  "joinTeamCodeLength": "Code must be 6 characters",
+  "joinTeamButton": "Join team",
+
+  "addTeamTaskTitle": "New team task",
+  "teamTaskAssignLabel": "Assign to (optional)",
+
+  "settingsTitle": "Settings",
+  "settingsDefaultUser": "User",
+  "settingsNotificationsTitle": "Local notifications",
+  "settingsNotificationsSubtitle": "Reminders for tasks with a due date",
+  "settingsThemeTitle": "Theme",
+  "settingsThemeSystem": "System",
+  "settingsThemeLight": "Light",
+  "settingsThemeDark": "Dark",
+  "settingsThemeDesert": "Desert",
+  "settingsThemeForest": "Forest",
+  "settingsLanguageTitle": "Language",
+  "settingsLogout": "Sign out",
+  "settingsLogoutConfirm": "Are you sure you want to sign out?",
+
+  "notificationChannelName": "Easy Todo Notifications",
+  "notificationChannelDescription": "Reminders for pending tasks",
+  "notificationTitle": "Pending task: {taskTitle}",
+  "@notificationTitle": {
+    "placeholders": {
+      "taskTitle": { "type": "String" }
+    }
+  },
+  "notificationDefaultBody": "You have a task to complete"
+}

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "498730641513",
+    "project_id": "easytodo-a2ddb",
+    "storage_bucket": "easytodo-a2ddb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498730641513:android:15eb2d6a5fecd88aa09af8",
+        "android_client_info": {
+          "package_name": "com.ramonito.easy_todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498730641513-ocr6n7h5rvmopsjbasd5np8pg1qh3b8s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAy5LMBxXdendR-sC-gpFLVRGItshYFbBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498730641513-ocr6n7h5rvmopsjbasd5np8pg1qh3b8s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "498730641513-3nrn9q6ndu5iuuqjlvr0upu576thn1qg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ramonito.easyTodo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
