@@ -101,22 +101,22 @@ app_localizations_es.dart ← GENERADO
 
 ---
 
-## Phase 5: Pre-commit hook para validar sincronía [ ]
+## Phase 5: Pre-commit hook para validar sincronía [✓]
 
 > Evitar que alguien suba un commit donde los `.arb` y los Dart estén desfasados o donde se
 > hayan editado los Dart a mano.
 
-- [ ] 1. Crear `scripts/check_l10n.dart`: script Dart que lee `app_en.arb` y verifica que cada
+- [✓] 1. Crear `scripts/check_l10n.dart`: script Dart que lee `app_en.arb` y verifica que cada
          key exista también en `app_es.arb`. Sale con código de error si falta alguno.
-- [ ] 2. Crear `.git/hooks/pre-commit` (o usar `lefthook`/`husky` si ya está configurado):
+- [✓] 2. Crear `.git/hooks/pre-commit` (o usar `lefthook`/`husky` si ya está configurado):
          ```bash
          #!/bin/sh
          dart scripts/check_l10n.dart || exit 1
          ```
-- [ ] 3. Asegurarse de que el hook sea ejecutable: `chmod +x .git/hooks/pre-commit`.
-- [ ] 4. Probar el hook quitando un key de `app_es.arb` y verificando que el commit falla con
+- [✓] 3. Asegurarse de que el hook sea ejecutable: `chmod +x .git/hooks/pre-commit`.
+- [✓] 4. Probar el hook quitando un key de `app_es.arb` y verificando que el commit falla con
          mensaje claro.
-- [ ] 5. Restaurar el key eliminado en la prueba.
+- [✓] 5. Restaurar el key eliminado en la prueba.
 
 ---
 
