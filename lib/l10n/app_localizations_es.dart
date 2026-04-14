@@ -46,12 +46,6 @@ class AppLocalizationsEs extends AppLocalizations {
       'La contraseña debe tener al menos 6 caracteres';
 
   @override
-  String get signUpButton => 'Crear cuenta';
-
-  @override
-  String get signInButton => 'Iniciar sesión';
-
-  @override
   String get nameLabel => 'Nombre';
 
   @override
@@ -78,6 +72,12 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get usernameTaken => 'Nombre de usuario no disponible';
+
+  @override
+  String get signUpButton => 'Crear cuenta';
+
+  @override
+  String get signInButton => 'Iniciar sesión';
 
   @override
   String get continueWithGoogle => 'Continuar con Google';

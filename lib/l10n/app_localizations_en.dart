@@ -45,12 +45,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordTooShortError => 'Password must be at least 6 characters';
 
   @override
-  String get signUpButton => 'Create account';
-
-  @override
-  String get signInButton => 'Sign in';
-
-  @override
   String get nameLabel => 'Name';
 
   @override
@@ -76,6 +70,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get usernameTaken => 'Username already taken';
+
+  @override
+  String get signUpButton => 'Create account';
+
+  @override
+  String get signInButton => 'Sign in';
 
   @override
   String get continueWithGoogle => 'Continue with Google';
