@@ -22,6 +22,8 @@ class TeamModel extends TeamEntity {
           userId: userId,
           role: m['role'] as String? ?? 'member',
           joinedAt: (m['joinedAt'] as Timestamp).toDate(),
+          username: m['username'] as String?,
+          name: m['name'] as String?,
         ),
       );
     });
@@ -43,6 +45,8 @@ class TeamModel extends TeamEntity {
         (userId, member) => MapEntry(userId, {
           'role': member.role,
           'joinedAt': Timestamp.fromDate(member.joinedAt),
+          if (member.username != null) 'username': member.username,
+          if (member.name != null) 'name': member.name,
         }),
       ),
     };

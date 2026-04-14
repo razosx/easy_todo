@@ -32,7 +32,8 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(const SignInWithEmailParams(email: '', password: ''));
-    registerFallbackValue(const SignUpWithEmailParams(email: '', password: ''));
+    registerFallbackValue(const SignUpWithEmailParams(
+        email: '', password: '', name: '', username: ''));
     registerFallbackValue(const NoParams());
   });
 
@@ -124,6 +125,8 @@ void main() {
       act: (bloc) => bloc.add(const SignUpWithEmailRequested(
         email: 'new@test.com',
         password: 'password123',
+        name: 'Test User',
+        username: 'testuser',
       )),
       expect: () => [
         isA<AuthLoading>(),
@@ -141,6 +144,8 @@ void main() {
       act: (bloc) => bloc.add(const SignUpWithEmailRequested(
         email: 'existing@test.com',
         password: 'password123',
+        name: 'Test User',
+        username: 'existinguser',
       )),
       expect: () => [
         isA<AuthLoading>(),
@@ -186,6 +191,8 @@ void main() {
       'emits AuthAuthenticated when current user exists',
       build: () {
         when(() => mockAuthRepository.currentUser).thenReturn(tUser);
+        when(() => mockAuthRepository.getFullCurrentUser())
+            .thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
       act: (bloc) => bloc.add(AuthCheckRequested()),

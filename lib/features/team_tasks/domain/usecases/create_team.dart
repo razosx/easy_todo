@@ -12,16 +12,24 @@ class CreateTeam extends UseCase<TeamEntity, CreateTeamParams> {
 
   @override
   Future<Either<Failure, TeamEntity>> call(CreateTeamParams params) {
-    return repository.createTeam(params.name, params.userId);
+    return repository.createTeam(
+        params.name, params.userId, params.username, params.memberName);
   }
 }
 
 class CreateTeamParams extends Equatable {
   final String name;
   final String userId;
+  final String? username;
+  final String? memberName;
 
-  const CreateTeamParams({required this.name, required this.userId});
+  const CreateTeamParams({
+    required this.name,
+    required this.userId,
+    this.username,
+    this.memberName,
+  });
 
   @override
-  List<Object?> get props => [name, userId];
+  List<Object?> get props => [name, userId, username, memberName];
 }

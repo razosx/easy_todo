@@ -1,4 +1,5 @@
 import 'package:easy_todo/features/tasks/domain/entities/task_priority.dart';
+import 'package:easy_todo/features/team_tasks/domain/entities/team_member_entity.dart';
 import 'package:easy_todo/features/team_tasks/domain/entities/team_task_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -8,6 +9,7 @@ class TeamTaskCard extends StatelessWidget {
   final VoidCallback onComplete;
   final VoidCallback onDelete;
   final VoidCallback? onAssign;
+  final Map<String, TeamMemberEntity> members;
 
   const TeamTaskCard({
     super.key,
@@ -15,6 +17,7 @@ class TeamTaskCard extends StatelessWidget {
     required this.onComplete,
     required this.onDelete,
     this.onAssign,
+    this.members = const {},
   });
 
   @override
@@ -65,7 +68,10 @@ class TeamTaskCard extends StatelessWidget {
       parts.add(DateFormat('d MMM', 'es').format(task.dueDate!));
     }
     if (task.assignedTo != null) {
-      parts.add('→ ${task.assignedTo}');
+      final member = members[task.assignedTo];
+      final displayName =
+          member?.username ?? member?.name ?? task.assignedTo!;
+      parts.add('→ $displayName');
     }
     if (parts.isEmpty) return null;
     return Text(

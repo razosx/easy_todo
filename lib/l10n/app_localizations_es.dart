@@ -52,6 +52,34 @@ class AppLocalizationsEs extends AppLocalizations {
   String get signInButton => 'Iniciar sesión';
 
   @override
+  String get nameLabel => 'Nombre';
+
+  @override
+  String get nameEmptyError => 'Ingresa tu nombre';
+
+  @override
+  String get usernameLabel => 'Nombre de usuario';
+
+  @override
+  String get usernameEmptyError => 'Ingresa un nombre de usuario';
+
+  @override
+  String get usernameTooShortError =>
+      'El nombre de usuario debe tener al menos 3 caracteres';
+
+  @override
+  String get usernameInvalidError => 'Solo letras, números y guiones bajos';
+
+  @override
+  String get usernameChecking => 'Verificando...';
+
+  @override
+  String get usernameAvailable => 'Disponible';
+
+  @override
+  String get usernameTaken => 'Nombre de usuario no disponible';
+
+  @override
   String get continueWithGoogle => 'Continuar con Google';
 
   @override

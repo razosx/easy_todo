@@ -9,10 +9,14 @@ This skill takes a previously created plan and executes it step by step. It allo
 
 ## Instructions
 1. Provide the name of the plan you want to execute (the md file created by the create-plan skill).
-2. The skill will load the plan and display the phases in a structured format.
-3. For each phase, the skill will update the status to "In Progress" represented by [X] when you start working on it and "Done" represented by [✓] when you complete it.
-4. For each step within the phases, you can also update their status to track your progress effectively.
-5. The skill will stage and commit all changes after completing each phase, ensuring that your progress is saved and can be referenced later.
+2. You will create a and switch to a new branch with the representative name of the plan to keep track of all changes related to the execution of the plan.
+3. The skill will load the plan and display the phases in a structured format.
+4. For each phase, the skill will update the status to "In Progress" represented by [X] when you start working on it and "Done" represented by [✓] when you complete it.
+5. For each step within the phases, you will also update their status to track your progress effectively The status options for each step are "To Do" represented by [ ], "In Progress" represented by [X], and "Done" represented by [✓].
+6. The skill will stage and commit all changes after completing each phase, ensuring that your progress is saved and can be referenced later.
+7. Whenevr you complete a phase you will stop, update the status of the phase to "Done" represented by [✓] and request for feedback from the user before moving on to the next phase. This allows for any necessary adjustments to be made to the plan based on the user's feedback. THIS IS MANDAORY TO ENSURE THAT THE PLAN IS EXECUTED ACCORDING TO THE USER'S EXPECTATIONS AND TO ALLOW FOR FLEXIBILITY IN CASE ANY changes are needed.
+8. Repeat the process for each phase until the entire plan is executed.
+9. After completing all phases, the skill will merge master into the current branch to ensure that all changes are integrated into the main codebase.
 
 ## Example Output
 ```md

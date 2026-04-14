@@ -12,16 +12,24 @@ class JoinTeam extends UseCase<TeamEntity, JoinTeamParams> {
 
   @override
   Future<Either<Failure, TeamEntity>> call(JoinTeamParams params) {
-    return repository.joinTeam(params.inviteCode, params.userId);
+    return repository.joinTeam(
+        params.inviteCode, params.userId, params.username, params.memberName);
   }
 }
 
 class JoinTeamParams extends Equatable {
   final String inviteCode;
   final String userId;
+  final String? username;
+  final String? memberName;
 
-  const JoinTeamParams({required this.inviteCode, required this.userId});
+  const JoinTeamParams({
+    required this.inviteCode,
+    required this.userId,
+    this.username,
+    this.memberName,
+  });
 
   @override
-  List<Object?> get props => [inviteCode, userId];
+  List<Object?> get props => [inviteCode, userId, username, memberName];
 }

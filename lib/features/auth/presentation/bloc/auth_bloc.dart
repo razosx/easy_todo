@@ -34,12 +34,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthCheckRequested event,
     Emitter<AuthState> emit,
   ) async {
-    final currentUser = _authRepository.currentUser;
-    if (currentUser != null) {
-      emit(AuthAuthenticated(user: currentUser));
-    } else {
+    final firebaseUser = _authRepository.currentUser;
+    if (firebaseUser == null) {
       emit(AuthUnauthenticated());
+      return;
     }
+    final result = await _authRepository.getFullCurrentUser();
+    result.fold(
+      (_) => emit(AuthAuthenticated(user: firebaseUser)),
+      (user) => emit(
+          user != null ? AuthAuthenticated(user: user) : AuthUnauthenticated()),
+    );
   }
 
   Future<void> _onSignInWithEmail(
@@ -62,7 +67,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     emit(AuthLoading());
     final result = await signUpWithEmail(
-      SignUpWithEmailParams(email: event.email, password: event.password),
+      SignUpWithEmailParams(
+        email: event.email,
+        password: event.password,
+        name: event.name,
+        username: event.username,
+      ),
     );
     result.fold(
       (failure) => emit(AuthError(message: failure.message)),

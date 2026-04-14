@@ -58,7 +58,12 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
       CreateTeamRequested event, Emitter<TeamState> emit) async {
     emit(TeamLoading());
     final result = await createTeam(
-      CreateTeamParams(name: event.name, userId: event.userId),
+      CreateTeamParams(
+        name: event.name,
+        userId: event.userId,
+        username: event.username,
+        memberName: event.memberName,
+      ),
     );
     result.fold(
       (failure) => emit(TeamError(message: failure.message)),
@@ -70,7 +75,12 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
       JoinTeamRequested event, Emitter<TeamState> emit) async {
     emit(TeamLoading());
     final result = await joinTeam(
-      JoinTeamParams(inviteCode: event.inviteCode, userId: event.userId),
+      JoinTeamParams(
+        inviteCode: event.inviteCode,
+        userId: event.userId,
+        username: event.username,
+        memberName: event.memberName,
+      ),
     );
     result.fold(
       (failure) => emit(TeamError(message: failure.message)),

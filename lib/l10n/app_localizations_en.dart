@@ -51,6 +51,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signInButton => 'Sign in';
 
   @override
+  String get nameLabel => 'Name';
+
+  @override
+  String get nameEmptyError => 'Enter your name';
+
+  @override
+  String get usernameLabel => 'Username';
+
+  @override
+  String get usernameEmptyError => 'Enter a username';
+
+  @override
+  String get usernameTooShortError => 'Username must be at least 3 characters';
+
+  @override
+  String get usernameInvalidError => 'Only letters, numbers and underscores';
+
+  @override
+  String get usernameChecking => 'Checking...';
+
+  @override
+  String get usernameAvailable => 'Available';
+
+  @override
+  String get usernameTaken => 'Username already taken';
+
+  @override
   String get continueWithGoogle => 'Continue with Google';
 
   @override

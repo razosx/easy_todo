@@ -173,7 +173,8 @@ class _AddTeamTaskBottomSheetState extends State<AddTeamTaskBottomSheet> {
                   ),
                   ...memberEntries.map((e) => DropdownMenuItem(
                         value: e.key,
-                        child: Text(e.key),
+                        child: Text(
+                            e.value.username ?? e.value.name ?? e.key),
                       )),
                 ],
                 onChanged: (v) => setState(() => _assignedTo = v),

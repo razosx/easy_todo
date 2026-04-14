@@ -7,6 +7,7 @@ import 'package:easy_todo/core/theme/app_theme.dart';
 import 'package:easy_todo/core/theme/theme_cubit.dart';
 import 'package:easy_todo/l10n/app_localizations.dart';
 import 'package:easy_todo/features/auth/domain/repositories/auth_repository.dart';
+import 'package:easy_todo/features/auth/domain/usecases/check_username_available.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_in_with_google.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_out.dart';
@@ -34,7 +35,7 @@ import 'package:easy_todo/features/team_tasks/presentation/bloc/team_event.dart'
 import 'package:easy_todo/features/team_tasks/presentation/bloc/team_tasks_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+// flutter_localizations imported via AppLocalizations.localizationsDelegates;
 
 class EasyTodoApp extends StatefulWidget {
   final LocalNotificationService localNotificationService;
@@ -43,6 +44,7 @@ class EasyTodoApp extends StatefulWidget {
   final SignUpWithEmail signUpWithEmail;
   final SignInWithGoogle signInWithGoogle;
   final SignOut signOut;
+  final CheckUsernameAvailable checkUsernameAvailable;
   // Personal tasks
   final GetTasks getTasks;
   final CreateTask createTask;
@@ -68,6 +70,7 @@ class EasyTodoApp extends StatefulWidget {
     required this.signUpWithEmail,
     required this.signInWithGoogle,
     required this.signOut,
+    required this.checkUsernameAvailable,
     required this.getTasks,
     required this.createTask,
     required this.deleteTask,
@@ -172,6 +175,7 @@ class _EasyTodoAppState extends State<EasyTodoApp> {
         BlocProvider.value(value: _themeCubit),
         BlocProvider.value(value: _localeCubit),
         RepositoryProvider.value(value: widget.localNotificationService),
+        RepositoryProvider.value(value: widget.checkUsernameAvailable),
       ],
       child: BlocBuilder<LocaleCubit, Locale>(
         builder: (context, locale) {

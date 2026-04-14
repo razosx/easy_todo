@@ -6,6 +6,7 @@ import 'package:easy_todo/features/auth/data/datasources/auth_remote_data_source
 import 'package:easy_todo/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_in_with_email.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_in_with_google.dart';
+import 'package:easy_todo/features/auth/domain/usecases/check_username_available.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_out.dart';
 import 'package:easy_todo/features/auth/domain/usecases/sign_up_with_email.dart';
 import 'package:easy_todo/features/tasks/data/datasources/task_remote_data_source.dart';
@@ -65,6 +66,7 @@ void main() async {
   final authDataSource = AuthRemoteDataSourceImpl(
     firebaseAuth: FirebaseAuth.instance,
     googleSignIn: GoogleSignIn.instance,
+    firestore: FirebaseFirestore.instance,
   );
   final authRepository = AuthRepositoryImpl(remoteDataSource: authDataSource);
 
@@ -91,6 +93,7 @@ void main() async {
       signUpWithEmail: SignUpWithEmail(authRepository),
       signInWithGoogle: SignInWithGoogle(authRepository),
       signOut: SignOut(authRepository),
+      checkUsernameAvailable: CheckUsernameAvailable(authRepository),
       getTasks: GetTasks(taskRepository),
       createTask: CreateTask(taskRepository),
       deleteTask: DeleteTask(taskRepository),

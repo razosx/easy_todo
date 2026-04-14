@@ -5,8 +5,10 @@ import 'package:uuid/uuid.dart';
 
 abstract class TeamRemoteDataSource {
   Stream<TeamModel?> getTeam(String userId);
-  Future<TeamModel> createTeam(String name, String userId);
-  Future<TeamModel> joinTeam(String inviteCode, String userId);
+  Future<TeamModel> createTeam(
+      String name, String userId, String? username, String? memberName);
+  Future<TeamModel> joinTeam(
+      String inviteCode, String userId, String? username, String? memberName);
   Future<void> leaveTeam(String teamId, String userId);
 }
 
@@ -35,7 +37,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
   }
 
   @override
-  Future<TeamModel> createTeam(String name, String userId) async {
+  Future<TeamModel> createTeam(
+      String name, String userId, String? username, String? memberName) async {
     try {
       final inviteCode =
           const Uuid().v4().replaceAll('-', '').substring(0, 6).toUpperCase();
@@ -48,6 +51,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
           userId: {
             'role': 'admin',
             'joinedAt': Timestamp.fromDate(now),
+            if (username != null) 'username': username,
+            if (memberName != null) 'name': memberName,
           },
         },
       };
@@ -64,7 +69,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
   }
 
   @override
-  Future<TeamModel> joinTeam(String inviteCode, String userId) async {
+  Future<TeamModel> joinTeam(
+      String inviteCode, String userId, String? username, String? memberName) async {
     try {
       final query = await _firestore
           .collection('teams')
@@ -81,6 +87,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
         'members.$userId': {
           'role': 'member',
           'joinedAt': Timestamp.fromDate(now),
+          if (username != null) 'username': username,
+          if (memberName != null) 'name': memberName,
         },
       });
       await _firestore

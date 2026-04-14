@@ -33,6 +33,8 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
           CreateTeamRequested(
             name: _nameController.text.trim(),
             userId: authState.user.id,
+            username: authState.user.username,
+            memberName: authState.user.name,
           ),
         );
   }

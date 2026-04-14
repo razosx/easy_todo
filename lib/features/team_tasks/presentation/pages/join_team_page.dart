@@ -33,6 +33,8 @@ class _JoinTeamPageState extends State<JoinTeamPage> {
           JoinTeamRequested(
             inviteCode: _codeController.text.trim().toUpperCase(),
             userId: authState.user.id,
+            username: authState.user.username,
+            memberName: authState.user.name,
           ),
         );
   }

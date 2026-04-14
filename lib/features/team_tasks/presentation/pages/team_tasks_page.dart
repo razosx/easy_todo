@@ -275,6 +275,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
             initiallyExpanded: true,
             itemBuilder: (task) => TeamTaskCard(
               task: task,
+              members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
                     CompleteTeamTaskRequested(
                         taskId: task.id, teamId: team.id),
@@ -291,6 +292,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
             initiallyExpanded: true,
             itemBuilder: (task) => TeamTaskCard(
               task: task,
+              members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
                     CompleteTeamTaskRequested(
                         taskId: task.id, teamId: team.id),
@@ -309,6 +311,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
             initiallyExpanded: false,
             itemBuilder: (task) => TeamTaskCard(
               task: task,
+              members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
                     CompleteTeamTaskRequested(
                         taskId: task.id, teamId: team.id),
@@ -327,6 +330,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
             initiallyExpanded: false,
             itemBuilder: (task) => TeamTaskCard(
               task: task,
+              members: team.members,
               onComplete: () {},
               onDelete: () => context.read<TeamTasksBloc>().add(
                     DeleteTeamTaskRequested(
@@ -421,25 +425,31 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
                   Navigator.pop(context);
                 },
               ),
-              ...memberEntries.map((e) => ListTile(
-                    leading: CircleAvatar(
-                      child: Text(e.key[0].toUpperCase()),
-                    ),
-                    title: Text(e.key),
-                    subtitle: e.value.role == 'admin'
-                        ? Text(l10n.teamRoleAdmin)
-                        : null,
-                    onTap: () {
-                      context.read<TeamTasksBloc>().add(
-                            AssignTeamTaskRequested(
-                              taskId: taskId,
-                              teamId: team.id,
-                              assigneeId: e.key,
-                            ),
-                          );
-                      Navigator.pop(context);
-                    },
-                  )),
+              ...memberEntries.map((e) {
+                final displayName =
+                    e.value.username ?? e.value.name ?? e.key;
+                return ListTile(
+                  leading: CircleAvatar(
+                    child: Text(displayName.isNotEmpty
+                        ? displayName[0].toUpperCase()
+                        : '?'),
+                  ),
+                  title: Text(displayName),
+                  subtitle: e.value.role == 'admin'
+                      ? Text(l10n.teamRoleAdmin)
+                      : null,
+                  onTap: () {
+                    context.read<TeamTasksBloc>().add(
+                          AssignTeamTaskRequested(
+                            taskId: taskId,
+                            teamId: team.id,
+                            assigneeId: e.key,
+                          ),
+                        );
+                    Navigator.pop(context);
+                  },
+                );
+              }),
             ],
           ),
         ),

@@ -13,7 +13,7 @@
 
 ---
 
-## Phase 1: Capa de Dominio [ ]
+## Phase 1: Capa de Dominio [✓]
 ### Agregar `username` y `name` a las entidades y casos de uso del dominio.
 
 1. [ ] Agregar campos `username` y `name` a `UserEntity` (`lib/features/auth/domain/entities/user_entity.dart`)
@@ -24,7 +24,7 @@
 
 ---
 
-## Phase 2: Capa de Datos [ ]
+## Phase 2: Capa de Datos [✓]
 ### Actualizar modelos, data sources y repositorios para persistir y leer username/name en Firestore.
 
 1. [ ] Actualizar `UserModel` para incluir `username` y `name`: agregar a `toMap()`, `fromMap()` y `fromFirebaseUser()` (`lib/features/auth/data/models/user_model.dart`)
@@ -41,7 +41,7 @@
 
 ---
 
-## Phase 3: BLoC de Autenticación [ ]
+## Phase 3: BLoC de Autenticación [✓]
 ### Actualizar eventos, estados y lógica del AuthBloc para manejar los nuevos campos.
 
 1. [ ] Actualizar `SignUpWithEmailRequested` para incluir `name` y `username` (`lib/features/auth/presentation/bloc/auth_event.dart`)
@@ -50,7 +50,7 @@
 
 ---
 
-## Phase 4: UI — Formulario de Registro [ ]
+## Phase 4: UI — Formulario de Registro [✓]
 ### Agregar campos de nombre y username al formulario de registro con validación en tiempo real.
 
 1. [ ] Agregar `TextEditingController` para `name` y `username` en `_EmailSignInFormState` (`lib/features/auth/presentation/widgets/email_sign_in_form.dart`)
@@ -64,7 +64,7 @@
 
 ---
 
-## Phase 5: UI — Vista de Equipo (Asignación) [ ]
+## Phase 5: UI — Vista de Equipo (Asignación) [✓]
 ### Mostrar username en lugar de userId en los dropdowns y diálogos de asignación.
 
 1. [ ] En `AddTeamTaskBottomSheet` — el dropdown de asignación muestra `e.key` (userId); cambiar para mostrar `e.value.username ?? e.key` (`lib/features/team_tasks/presentation/widgets/add_team_task_bottom_sheet.dart`)
@@ -74,7 +74,7 @@
 
 ---
 
-## Phase 6: UI — Página de Configuración [ ]
+## Phase 6: UI — Página de Configuración [✓]
 ### Mostrar nombre y username del usuario en la sección de perfil.
 
 1. [ ] Actualizar `_ProfileSection` para recibir y mostrar el campo `username` del usuario (`lib/features/settings/presentation/pages/settings_page.dart`)
@@ -83,7 +83,7 @@
 
 ---
 
-## Phase 7: Localización [ ]
+## Phase 7: Localización [✓]
 ### Agregar los nuevos strings de UI a los archivos de localización.
 
 1. [ ] Agregar keys en inglés (`lib/l10n/app_localizations_en.dart`):

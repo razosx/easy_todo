@@ -13,7 +13,12 @@ void main() {
   late MockAuthRepository mockRepository;
 
   const tUser = UserEntity(id: 'uid-2', email: 'new@test.com');
-  const tParams = SignUpWithEmailParams(email: 'new@test.com', password: 'password123');
+  const tParams = SignUpWithEmailParams(
+    email: 'new@test.com',
+    password: 'password123',
+    name: 'Test User',
+    username: 'testuser',
+  );
 
   setUp(() {
     mockRepository = MockAuthRepository();
@@ -24,6 +29,8 @@ void main() {
     when(() => mockRepository.signUpWithEmail(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          name: any(named: 'name'),
+          username: any(named: 'username'),
         )).thenAnswer((_) async => const Right(tUser));
 
     final result = await usecase(tParams);
@@ -32,6 +39,8 @@ void main() {
     verify(() => mockRepository.signUpWithEmail(
           email: 'new@test.com',
           password: 'password123',
+          name: 'Test User',
+          username: 'testuser',
         )).called(1);
   });
 
@@ -39,6 +48,8 @@ void main() {
     when(() => mockRepository.signUpWithEmail(
           email: any(named: 'email'),
           password: any(named: 'password'),
+          name: any(named: 'name'),
+          username: any(named: 'username'),
         )).thenAnswer((_) async =>
         const Left(AuthFailure(message: 'Email already in use')));
 

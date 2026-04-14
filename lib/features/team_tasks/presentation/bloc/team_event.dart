@@ -38,21 +38,35 @@ class TeamStreamErrored extends TeamEvent {
 class CreateTeamRequested extends TeamEvent {
   final String name;
   final String userId;
+  final String? username;
+  final String? memberName;
 
-  const CreateTeamRequested({required this.name, required this.userId});
+  const CreateTeamRequested({
+    required this.name,
+    required this.userId,
+    this.username,
+    this.memberName,
+  });
 
   @override
-  List<Object?> get props => [name, userId];
+  List<Object?> get props => [name, userId, username, memberName];
 }
 
 class JoinTeamRequested extends TeamEvent {
   final String inviteCode;
   final String userId;
+  final String? username;
+  final String? memberName;
 
-  const JoinTeamRequested({required this.inviteCode, required this.userId});
+  const JoinTeamRequested({
+    required this.inviteCode,
+    required this.userId,
+    this.username,
+    this.memberName,
+  });
 
   @override
-  List<Object?> get props => [inviteCode, userId];
+  List<Object?> get props => [inviteCode, userId, username, memberName];
 }
 
 class LeaveTeamRequested extends TeamEvent {

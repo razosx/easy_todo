@@ -11,7 +11,13 @@ abstract class AuthRepository {
   Future<Either<Failure, UserEntity>> signUpWithEmail({
     required String email,
     required String password,
+    required String name,
+    required String username,
   });
+
+  Future<Either<Failure, bool>> checkUsernameAvailable(String username);
+
+  Future<Either<Failure, UserEntity?>> getFullCurrentUser();
 
   Future<Either<Failure, UserEntity>> signInWithGoogle();
 

@@ -25,7 +25,8 @@ class SettingsPage extends StatelessWidget {
           return ListView(
             children: [
               _ProfileSection(
-                displayName: user.displayName,
+                displayName: user.name ?? user.displayName,
+                username: user.username,
                 email: user.email,
                 photoUrl: user.photoUrl,
               ),
@@ -47,12 +48,14 @@ class SettingsPage extends StatelessWidget {
 
 class _ProfileSection extends StatelessWidget {
   final String? displayName;
+  final String? username;
   final String email;
   final String? photoUrl;
 
   const _ProfileSection({
     required this.displayName,
     required this.email,
+    this.username,
     this.photoUrl,
   });
 
@@ -74,7 +77,21 @@ class _ProfileSection extends StatelessWidget {
         displayName ?? l10n.settingsDefaultUser,
         style: Theme.of(context).textTheme.titleMedium,
       ),
-      subtitle: Text(email),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (username != null)
+            Text(
+              '@$username',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
+          Text(email),
+        ],
+      ),
     );
   }
 }

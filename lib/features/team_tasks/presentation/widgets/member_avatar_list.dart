@@ -27,19 +27,22 @@ class MemberAvatarList extends StatelessWidget {
         children: List.generate(memberList.length, (i) {
           final member = memberList[i];
           final isAdmin = member.role == 'admin';
+          final displayName =
+              member.username ?? member.name ?? member.userId;
           return Positioned(
             left: i * (avatarRadius * 2 - overlap),
             child: Tooltip(
-              message: member.userId + (isAdmin ? AppLocalizations.of(context)!.teamAdminSuffix : ''),
+              message: displayName +
+                  (isAdmin
+                      ? AppLocalizations.of(context)!.teamAdminSuffix
+                      : ''),
               child: CircleAvatar(
                 radius: avatarRadius,
                 backgroundColor: isAdmin
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.secondaryContainer,
                 child: Text(
-                  member.userId.isNotEmpty
-                      ? member.userId[0].toUpperCase()
-                      : '?',
+                  displayName.isNotEmpty ? displayName[0].toUpperCase() : '?',
                   style: TextStyle(
                     fontSize: avatarRadius * 0.8,
                     color: isAdmin

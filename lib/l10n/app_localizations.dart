@@ -182,6 +182,60 @@ abstract class AppLocalizations {
   /// **'Sign in'**
   String get signInButton;
 
+  /// No description provided for @nameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get nameLabel;
+
+  /// No description provided for @nameEmptyError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your name'**
+  String get nameEmptyError;
+
+  /// No description provided for @usernameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Username'**
+  String get usernameLabel;
+
+  /// No description provided for @usernameEmptyError.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a username'**
+  String get usernameEmptyError;
+
+  /// No description provided for @usernameTooShortError.
+  ///
+  /// In en, this message translates to:
+  /// **'Username must be at least 3 characters'**
+  String get usernameTooShortError;
+
+  /// No description provided for @usernameInvalidError.
+  ///
+  /// In en, this message translates to:
+  /// **'Only letters, numbers and underscores'**
+  String get usernameInvalidError;
+
+  /// No description provided for @usernameChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking...'**
+  String get usernameChecking;
+
+  /// No description provided for @usernameAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Available'**
+  String get usernameAvailable;
+
+  /// No description provided for @usernameTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Username already taken'**
+  String get usernameTaken;
+
   /// No description provided for @continueWithGoogle.
   ///
   /// In en, this message translates to:

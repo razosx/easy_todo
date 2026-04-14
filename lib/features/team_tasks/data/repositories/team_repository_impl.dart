@@ -20,9 +20,10 @@ class TeamRepositoryImpl implements TeamRepository {
 
   @override
   Future<Either<Failure, TeamEntity>> createTeam(
-      String name, String userId) async {
+      String name, String userId, String? username, String? memberName) async {
     try {
-      final result = await remoteDataSource.createTeam(name, userId);
+      final result =
+          await remoteDataSource.createTeam(name, userId, username, memberName);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -31,9 +32,10 @@ class TeamRepositoryImpl implements TeamRepository {
 
   @override
   Future<Either<Failure, TeamEntity>> joinTeam(
-      String inviteCode, String userId) async {
+      String inviteCode, String userId, String? username, String? memberName) async {
     try {
-      final result = await remoteDataSource.joinTeam(inviteCode, userId);
+      final result = await remoteDataSource.joinTeam(
+          inviteCode, userId, username, memberName);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
