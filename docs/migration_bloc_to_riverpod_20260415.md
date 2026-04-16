@@ -1072,7 +1072,7 @@ escucha el provider de auth.
 
 ---
 
-## Phase 10: Migrar widgets de Auth (LoginPage, EmailSignInForm, GoogleSignInButton) [ ]
+## Phase 10: Migrar widgets de Auth (LoginPage, EmailSignInForm, GoogleSignInButton) [✓]
 
 ### Descripción
 Migrar todos los widgets de autenticación de `BlocListener`/`BlocBuilder`
