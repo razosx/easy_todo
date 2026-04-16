@@ -789,7 +789,7 @@ CRUD. Se convierte en `Notifier`.
 
 ---
 
-## Phase 7: Migrar TeamTasksBloc → TeamTasksNotifier [ ]
+## Phase 7: Migrar TeamTasksBloc → TeamTasksNotifier [✓]
 
 ### Descripción
 El `TeamTasksBloc` tiene la lógica más compleja de categorización
