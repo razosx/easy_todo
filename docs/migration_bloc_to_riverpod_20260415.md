@@ -1121,7 +1121,7 @@ a `ConsumerWidget`/`ConsumerStatefulWidget` con `ref.watch`/`ref.listen`.
 
 ---
 
-## Phase 11: Migrar widgets de Tasks (HomePage, MainScaffold, AddTaskBottomSheet) [ ]
+## Phase 11: Migrar widgets de Tasks (HomePage, MainScaffold, AddTaskBottomSheet) [✓]
 
 ### Descripción
 Migrar los widgets de la feature de tasks para usar `ref.watch` y `ref.read`
@@ -1156,7 +1156,7 @@ en lugar de `BlocBuilder`/`BlocConsumer`/`context.read<BLoC>()`.
 
 ---
 
-## Phase 12: Migrar widgets de Team Tasks (TeamTasksPage, CreateTeamPage, JoinTeamPage) [ ]
+## Phase 12: Migrar widgets de Team Tasks (TeamTasksPage, CreateTeamPage, JoinTeamPage) [✓]
 
 ### Descripción
 Migrar los widgets de la feature de team tasks. Estos son los más complejos
@@ -1214,7 +1214,7 @@ porque usan `BlocConsumer<TeamBloc>` + `context.read<TeamTasksBloc>()` +
 
 ---
 
-## Phase 13: Migrar SettingsPage [ ]
+## Phase 13: Migrar SettingsPage [✓]
 
 ### Descripción
 La settings page usa `BlocBuilder` para auth, theme y locale.
@@ -1237,7 +1237,7 @@ La settings page usa `BlocBuilder` para auth, theme y locale.
 
 ---
 
-## Phase 14: Limpieza final y verificación [ ]
+## Phase 14: Limpieza final y verificación [✓]
 
 ### Descripción
 Eliminar todo rastro de BLoC/GetIt, verificar que no quedan imports huérfanos,
