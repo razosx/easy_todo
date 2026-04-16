@@ -408,7 +408,7 @@ mínima. Se convierten en `Notifier` de Riverpod.
 
 ---
 
-## Phase 4: Migrar AuthBloc → AuthNotifier [ ]
+## Phase 4: Migrar AuthBloc → AuthNotifier [✓]
 
 ### Descripción
 Este es el BLoC más crítico. Maneja autenticación, sesión persistida y
