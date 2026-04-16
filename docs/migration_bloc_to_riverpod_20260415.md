@@ -322,7 +322,7 @@ repositories, use cases y servicios.
 
 ---
 
-## Phase 3: Migrar ThemeCubit y LocaleCubit a Riverpod Notifiers [ ]
+## Phase 3: Migrar ThemeCubit y LocaleCubit a Riverpod Notifiers [✓]
 
 ### Descripción
 Estos son los más simples de migrar. Son Cubits con estado síncrono y lógica
