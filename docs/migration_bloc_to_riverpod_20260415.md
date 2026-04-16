@@ -693,7 +693,7 @@ el stream internamente.
 
 ---
 
-## Phase 6: Migrar TeamBloc → TeamNotifier [ ]
+## Phase 6: Migrar TeamBloc → TeamNotifier [✓]
 
 ### Descripción
 Similar al `TasksBloc`, el `TeamBloc` tiene suscripción a stream + operaciones
