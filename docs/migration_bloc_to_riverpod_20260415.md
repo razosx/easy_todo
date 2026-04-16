@@ -553,7 +553,7 @@ estado sealed class.
 
 ---
 
-## Phase 5: Migrar TasksBloc → TasksNotifier [ ]
+## Phase 5: Migrar TasksBloc → TasksNotifier [✓]
 
 ### Descripción
 El `TasksBloc` tiene una suscripción a un stream de Firestore y lógica
