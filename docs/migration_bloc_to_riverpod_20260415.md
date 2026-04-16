@@ -917,7 +917,7 @@ el `currentUserId`.
 
 ---
 
-## Phase 8: Migrar main.dart y app.dart [ ]
+## Phase 8: Migrar main.dart y app.dart [✓]
 
 ### Descripción
 Reescribir el bootstrap de la app para usar `ProviderScope` en lugar de
@@ -1013,7 +1013,7 @@ de `main.dart`.
 
 ---
 
-## Phase 9: Migrar AppRouter (GoRouter + Auth Redirect) [ ]
+## Phase 9: Migrar AppRouter (GoRouter + Auth Redirect) [✓]
 
 ### Descripción
 El router actual usa `GoRouterRefreshStream(authBloc.stream)` para redirigir
