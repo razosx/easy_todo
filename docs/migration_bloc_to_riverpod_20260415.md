@@ -149,7 +149,7 @@ verificar que la copia compila antes de empezar los cambios.
 
 ---
 
-## Phase 2: Infraestructura de DI con Riverpod (reemplazar GetIt + main.dart) [ ]
+## Phase 2: Infraestructura de DI con Riverpod (reemplazar GetIt + main.dart) [✓]
 
 ### Descripción
 Crear los providers de Riverpod que reemplazan la inyección manual de dependencias
