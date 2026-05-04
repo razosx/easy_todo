@@ -27,8 +27,7 @@ class _MainScaffoldState extends State<MainScaffold> {
       body: _pages[_currentIndex],
       bottomNavigationBar: NavigationBar(
         selectedIndex: _currentIndex,
-        onDestinationSelected: (index) =>
-            setState(() => _currentIndex = index),
+        onDestinationSelected: (index) => setState(() => _currentIndex = index),
         destinations: [
           NavigationDestination(
             icon: const Icon(Icons.home_outlined),

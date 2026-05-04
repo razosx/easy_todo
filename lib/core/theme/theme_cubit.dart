@@ -19,18 +19,18 @@ class ThemeCubit extends Cubit<AppTheme> {
   }
 
   static AppTheme _fromString(String? value) => switch (value) {
-        'light' => AppTheme.light,
-        'dark' => AppTheme.dark,
-        'desierto' => AppTheme.desierto,
-        'bosque' => AppTheme.bosque,
-        _ => AppTheme.system,
-      };
+    'light' => AppTheme.light,
+    'dark' => AppTheme.dark,
+    'desierto' => AppTheme.desierto,
+    'bosque' => AppTheme.bosque,
+    _ => AppTheme.system,
+  };
 
   static String _toString(AppTheme theme) => switch (theme) {
-        AppTheme.light => 'light',
-        AppTheme.dark => 'dark',
-        AppTheme.desierto => 'desierto',
-        AppTheme.bosque => 'bosque',
-        _ => 'system',
-      };
+    AppTheme.light => 'light',
+    AppTheme.dark => 'dark',
+    AppTheme.desierto => 'desierto',
+    AppTheme.bosque => 'bosque',
+    _ => 'system',
+  };
 }

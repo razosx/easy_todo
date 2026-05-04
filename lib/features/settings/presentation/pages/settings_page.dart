@@ -71,7 +71,9 @@ class _ProfileSection extends StatelessWidget {
       leading: CircleAvatar(
         radius: 28,
         backgroundImage: photoUrl != null ? NetworkImage(photoUrl!) : null,
-        child: photoUrl == null ? Text(initial, style: const TextStyle(fontSize: 20)) : null,
+        child: photoUrl == null
+            ? Text(initial, style: const TextStyle(fontSize: 20))
+            : null,
       ),
       title: Text(
         displayName ?? l10n.settingsDefaultUser,
@@ -85,9 +87,9 @@ class _ProfileSection extends StatelessWidget {
             Text(
               '@$username',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w500,
-                  ),
+                color: Theme.of(context).colorScheme.primary,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           Text(email),
         ],
@@ -141,12 +143,12 @@ class _NotificationsSectionState extends State<_NotificationsSection> {
 }
 
 String _themeLabel(AppTheme t, AppLocalizations l10n) => switch (t) {
-      AppTheme.system => l10n.settingsThemeSystem,
-      AppTheme.light => l10n.settingsThemeLight,
-      AppTheme.dark => l10n.settingsThemeDark,
-      AppTheme.desierto => l10n.settingsThemeDesert,
-      AppTheme.bosque => l10n.settingsThemeForest,
-    };
+  AppTheme.system => l10n.settingsThemeSystem,
+  AppTheme.light => l10n.settingsThemeLight,
+  AppTheme.dark => l10n.settingsThemeDark,
+  AppTheme.desierto => l10n.settingsThemeDesert,
+  AppTheme.bosque => l10n.settingsThemeForest,
+};
 
 class _ThemeSection extends StatelessWidget {
   const _ThemeSection();
@@ -165,8 +167,7 @@ class _ThemeSection extends StatelessWidget {
               trailing: DropdownButton<AppTheme>(
                 value: appTheme,
                 underline: const SizedBox.shrink(),
-                onChanged: (t) =>
-                    context.read<ThemeCubit>().setTheme(t!),
+                onChanged: (t) => context.read<ThemeCubit>().setTheme(t!),
                 items: AppTheme.values.map((t) {
                   return DropdownMenuItem(
                     value: t,
@@ -239,7 +240,10 @@ class _SessionSection extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return ListTile(
       leading: const Icon(Icons.logout, color: Colors.red),
-      title: Text(l10n.settingsLogout, style: const TextStyle(color: Colors.red)),
+      title: Text(
+        l10n.settingsLogout,
+        style: const TextStyle(color: Colors.red),
+      ),
       onTap: () {
         showDialog<void>(
           context: context,
@@ -256,8 +260,10 @@ class _SessionSection extends StatelessWidget {
                   Navigator.pop(ctx);
                   context.read<AuthBloc>().add(SignOutRequested());
                 },
-                child: Text(l10n.settingsLogout,
-                    style: const TextStyle(color: Colors.red)),
+                child: Text(
+                  l10n.settingsLogout,
+                  style: const TextStyle(color: Colors.red),
+                ),
               ),
             ],
           ),

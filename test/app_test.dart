@@ -51,11 +51,9 @@ void main() {
     themeCubit = ThemeCubit();
     localeCubit = LocaleCubit()..loadLocale();
 
-    when(() => mockTasksBloc.state).thenReturn(const TasksLoaded(
-      todayTasks: [],
-      upcomingTasks: [],
-      completedTasks: [],
-    ));
+    when(() => mockTasksBloc.state).thenReturn(
+      const TasksLoaded(todayTasks: [], upcomingTasks: [], completedTasks: []),
+    );
     when(() => mockTasksBloc.stream).thenAnswer((_) => const Stream.empty());
   });
 
@@ -92,8 +90,7 @@ void main() {
 
   testWidgets('shows login page when not authenticated', (tester) async {
     when(() => mockAuthBloc.state).thenReturn(AuthUnauthenticated());
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildApp(mockAuthBloc));
     await tester.pumpAndSettle();
@@ -103,10 +100,10 @@ void main() {
   });
 
   testWidgets('shows home when authenticated', (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildApp(mockAuthBloc));
     await tester.pumpAndSettle();
@@ -117,10 +114,10 @@ void main() {
   testWidgets('redirects to login after sign out', (tester) async {
     final authController = StreamController<AuthState>.broadcast();
 
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => authController.stream);
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => authController.stream);
 
     // Use simple stub routes to avoid provider-scoping issues during transitions
     final router = GoRouter(

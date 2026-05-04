@@ -31,13 +31,13 @@ void main() {
           .doc('user-1')
           .collection('tasks')
           .add({
-        'userId': 'user-1',
-        'title': 'Existing Task',
-        'description': '',
-        'isCompleted': false,
-        'createdAt': Timestamp.fromDate(tCreatedAt),
-        'priority': 'low',
-      });
+            'userId': 'user-1',
+            'title': 'Existing Task',
+            'description': '',
+            'isCompleted': false,
+            'createdAt': Timestamp.fromDate(tCreatedAt),
+            'priority': 'low',
+          });
 
       final stream = dataSource.getTasks('user-1');
       final tasks = await stream.first;
@@ -57,14 +57,17 @@ void main() {
   });
 
   group('createTask', () {
-    test('should add task to Firestore and return task with generated id', () async {
-      final result = await dataSource.createTask(tTask);
+    test(
+      'should add task to Firestore and return task with generated id',
+      () async {
+        final result = await dataSource.createTask(tTask);
 
-      expect(result.id, isNotEmpty);
-      expect(result.title, 'Test Task');
-      expect(result.userId, 'user-1');
-      expect(result.description, 'Test description');
-    });
+        expect(result.id, isNotEmpty);
+        expect(result.title, 'Test Task');
+        expect(result.userId, 'user-1');
+        expect(result.description, 'Test description');
+      },
+    );
 
     test('should persist task in Firestore', () async {
       await dataSource.createTask(tTask);

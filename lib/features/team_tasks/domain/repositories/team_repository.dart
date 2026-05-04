@@ -5,8 +5,16 @@ import 'package:easy_todo/features/team_tasks/domain/entities/team_entity.dart';
 abstract class TeamRepository {
   Stream<Either<Failure, TeamEntity?>> getTeam(String userId);
   Future<Either<Failure, TeamEntity>> createTeam(
-      String name, String userId, String? username, String? memberName);
+    String name,
+    String userId,
+    String? username,
+    String? memberName,
+  );
   Future<Either<Failure, TeamEntity>> joinTeam(
-      String inviteCode, String userId, String? username, String? memberName);
+    String inviteCode,
+    String userId,
+    String? username,
+    String? memberName,
+  );
   Future<Either<Failure, void>> leaveTeam(String teamId, String userId);
 }

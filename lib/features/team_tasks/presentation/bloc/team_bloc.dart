@@ -33,8 +33,9 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
   void _onLoad(LoadTeamRequested event, Emitter<TeamState> emit) {
     emit(TeamLoading());
     _teamSubscription?.cancel();
-    _teamSubscription =
-        getTeam(GetTeamParams(userId: event.userId)).listen((result) {
+    _teamSubscription = getTeam(GetTeamParams(userId: event.userId)).listen((
+      result,
+    ) {
       result.fold(
         (failure) => add(TeamStreamErrored(message: failure.message)),
         (team) => add(TeamStreamUpdated(team: team)),
@@ -55,7 +56,9 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
   }
 
   Future<void> _onCreate(
-      CreateTeamRequested event, Emitter<TeamState> emit) async {
+    CreateTeamRequested event,
+    Emitter<TeamState> emit,
+  ) async {
     emit(TeamLoading());
     final result = await createTeam(
       CreateTeamParams(
@@ -71,8 +74,7 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
     );
   }
 
-  Future<void> _onJoin(
-      JoinTeamRequested event, Emitter<TeamState> emit) async {
+  Future<void> _onJoin(JoinTeamRequested event, Emitter<TeamState> emit) async {
     emit(TeamLoading());
     final result = await joinTeam(
       JoinTeamParams(
@@ -89,7 +91,9 @@ class TeamBloc extends Bloc<TeamEvent, TeamState> {
   }
 
   Future<void> _onLeave(
-      LeaveTeamRequested event, Emitter<TeamState> emit) async {
+    LeaveTeamRequested event,
+    Emitter<TeamState> emit,
+  ) async {
     emit(TeamLoading());
     final result = await leaveTeam(
       LeaveTeamParams(teamId: event.teamId, userId: event.userId),

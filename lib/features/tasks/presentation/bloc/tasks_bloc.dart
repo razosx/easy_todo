@@ -38,14 +38,14 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   void _onLoad(LoadTasksRequested event, Emitter<TasksState> emit) {
     emit(TasksLoading());
     _tasksSubscription?.cancel();
-    _tasksSubscription = getTasks(GetTasksParams(userId: event.userId)).listen(
-      (result) {
-        result.fold(
-          (failure) => add(TasksStreamErrored(message: failure.message)),
-          (tasks) => add(TasksStreamUpdated(tasks: tasks)),
-        );
-      },
-    );
+    _tasksSubscription = getTasks(GetTasksParams(userId: event.userId)).listen((
+      result,
+    ) {
+      result.fold(
+        (failure) => add(TasksStreamErrored(message: failure.message)),
+        (tasks) => add(TasksStreamUpdated(tasks: tasks)),
+      );
+    });
   }
 
   void _onStreamUpdated(TasksStreamUpdated event, Emitter<TasksState> emit) {
@@ -56,18 +56,21 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
     for (final task in event.tasks) {
       if (task.isCompleted) {
         completed.add(task);
-      } else if (task.dueDate != null && TaskDateUtils.isFuture(task.dueDate!)) {
+      } else if (task.dueDate != null &&
+          TaskDateUtils.isFuture(task.dueDate!)) {
         upcoming.add(task);
       } else {
         today.add(task);
       }
     }
 
-    emit(TasksLoaded(
-      todayTasks: today,
-      upcomingTasks: upcoming,
-      completedTasks: completed,
-    ));
+    emit(
+      TasksLoaded(
+        todayTasks: today,
+        upcomingTasks: upcoming,
+        completedTasks: completed,
+      ),
+    );
   }
 
   void _onStreamErrored(TasksStreamErrored event, Emitter<TasksState> emit) {
@@ -75,7 +78,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   Future<void> _onCreate(
-      CreateTaskRequested event, Emitter<TasksState> emit) async {
+    CreateTaskRequested event,
+    Emitter<TasksState> emit,
+  ) async {
     final result = await createTask(event.task);
     await result.fold(
       (failure) async => emit(TasksError(message: failure.message)),
@@ -92,7 +97,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   Future<void> _onDelete(
-      DeleteTaskRequested event, Emitter<TasksState> emit) async {
+    DeleteTaskRequested event,
+    Emitter<TasksState> emit,
+  ) async {
     await _cancelNotificationForTask(event.taskId);
     final result = await deleteTask(
       DeleteTaskParams(taskId: event.taskId, userId: event.userId),
@@ -104,7 +111,9 @@ class TasksBloc extends Bloc<TasksEvent, TasksState> {
   }
 
   Future<void> _onComplete(
-      CompleteTaskRequested event, Emitter<TasksState> emit) async {
+    CompleteTaskRequested event,
+    Emitter<TasksState> emit,
+  ) async {
     await _cancelNotificationForTask(event.taskId);
     final result = await completeTask(
       CompleteTaskParams(taskId: event.taskId, userId: event.userId),

@@ -26,8 +26,9 @@ void main() {
   });
 
   test('should return created TaskEntity when repository succeeds', () async {
-    when(() => mockRepository.createTask(any()))
-        .thenAnswer((_) async => Right(tTask));
+    when(
+      () => mockRepository.createTask(any()),
+    ).thenAnswer((_) async => Right(tTask));
 
     final result = await usecase(tTask);
 
@@ -37,7 +38,8 @@ void main() {
 
   test('should return ServerFailure when repository fails', () async {
     when(() => mockRepository.createTask(any())).thenAnswer(
-        (_) async => const Left(ServerFailure(message: 'Create error')));
+      (_) async => const Left(ServerFailure(message: 'Create error')),
+    );
 
     final result = await usecase(tTask);
 

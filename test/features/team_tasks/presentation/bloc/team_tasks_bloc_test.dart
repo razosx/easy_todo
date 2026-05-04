@@ -67,19 +67,20 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(const GetTeamTasksParams(teamId: ''));
-    registerFallbackValue(TeamTaskEntity(
-      id: '',
-      teamId: '',
-      title: '',
-      createdBy: '',
-      createdAt: DateTime.now(),
-    ));
     registerFallbackValue(
-        const AssignTaskParams(taskId: '', teamId: '', assigneeId: null));
+      TeamTaskEntity(
+        id: '',
+        teamId: '',
+        title: '',
+        createdBy: '',
+        createdAt: DateTime.now(),
+      ),
+    );
     registerFallbackValue(
-        const CompleteTeamTaskParams(taskId: '', teamId: ''));
-    registerFallbackValue(
-        const DeleteTeamTaskParams(taskId: '', teamId: ''));
+      const AssignTaskParams(taskId: '', teamId: '', assigneeId: null),
+    );
+    registerFallbackValue(const CompleteTeamTaskParams(taskId: '', teamId: ''));
+    registerFallbackValue(const DeleteTeamTaskParams(taskId: '', teamId: ''));
   });
 
   setUp(() {
@@ -115,12 +116,8 @@ void main() {
         );
         return teamTasksBloc;
       },
-      act: (bloc) =>
-          bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
-      expect: () => [
-        isA<TeamTasksLoading>(),
-        isA<TeamTasksLoaded>(),
-      ],
+      act: (bloc) => bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
+      expect: () => [isA<TeamTasksLoading>(), isA<TeamTasksLoaded>()],
     );
 
     blocTest<TeamTasksBloc, TeamTasksState>(
@@ -133,12 +130,8 @@ void main() {
         );
         return teamTasksBloc;
       },
-      act: (bloc) =>
-          bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
-      expect: () => [
-        isA<TeamTasksLoading>(),
-        isA<TeamTasksLoaded>(),
-      ],
+      act: (bloc) => bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
+      expect: () => [isA<TeamTasksLoading>(), isA<TeamTasksLoaded>()],
       verify: (bloc) {
         final state = bloc.state as TeamTasksLoaded;
         expect(state.assignedToMe, contains(tMyTask));
@@ -152,18 +145,12 @@ void main() {
       'emits [TeamTasksLoading, TeamTasksError] when loading fails',
       build: () {
         when(() => mockGetTeamTasks(any())).thenAnswer(
-          (_) => Stream.value(
-            const Left(ServerFailure(message: 'Error')),
-          ),
+          (_) => Stream.value(const Left(ServerFailure(message: 'Error'))),
         );
         return teamTasksBloc;
       },
-      act: (bloc) =>
-          bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
-      expect: () => [
-        isA<TeamTasksLoading>(),
-        isA<TeamTasksError>(),
-      ],
+      act: (bloc) => bloc.add(const LoadTeamTasksRequested(teamId: 'team-1')),
+      expect: () => [isA<TeamTasksLoading>(), isA<TeamTasksError>()],
     );
   });
 
@@ -171,17 +158,20 @@ void main() {
     blocTest<TeamTasksBloc, TeamTasksState>(
       'calls completeTeamTask use case with correct params',
       build: () {
-        when(() => mockCompleteTeamTask(any()))
-            .thenAnswer((_) async => Right(tCompletedTask));
+        when(
+          () => mockCompleteTeamTask(any()),
+        ).thenAnswer((_) async => Right(tCompletedTask));
         return teamTasksBloc;
       },
       act: (bloc) => bloc.add(
         const CompleteTeamTaskRequested(taskId: 'task-1', teamId: 'team-1'),
       ),
       verify: (_) {
-        verify(() => mockCompleteTeamTask(
-              const CompleteTeamTaskParams(taskId: 'task-1', teamId: 'team-1'),
-            )).called(1);
+        verify(
+          () => mockCompleteTeamTask(
+            const CompleteTeamTaskParams(taskId: 'task-1', teamId: 'team-1'),
+          ),
+        ).called(1);
       },
     );
   });
@@ -190,17 +180,20 @@ void main() {
     blocTest<TeamTasksBloc, TeamTasksState>(
       'calls deleteTeamTask use case with correct params',
       build: () {
-        when(() => mockDeleteTeamTask(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => mockDeleteTeamTask(any()),
+        ).thenAnswer((_) async => const Right(null));
         return teamTasksBloc;
       },
       act: (bloc) => bloc.add(
         const DeleteTeamTaskRequested(taskId: 'task-1', teamId: 'team-1'),
       ),
       verify: (_) {
-        verify(() => mockDeleteTeamTask(
-              const DeleteTeamTaskParams(taskId: 'task-1', teamId: 'team-1'),
-            )).called(1);
+        verify(
+          () => mockDeleteTeamTask(
+            const DeleteTeamTaskParams(taskId: 'task-1', teamId: 'team-1'),
+          ),
+        ).called(1);
       },
     );
   });
@@ -209,8 +202,9 @@ void main() {
     blocTest<TeamTasksBloc, TeamTasksState>(
       'calls assignTaskToMember use case with correct params',
       build: () {
-        when(() => mockAssignTaskToMember(any()))
-            .thenAnswer((_) async => Right(tMyTask));
+        when(
+          () => mockAssignTaskToMember(any()),
+        ).thenAnswer((_) async => Right(tMyTask));
         return teamTasksBloc;
       },
       act: (bloc) => bloc.add(
@@ -221,10 +215,15 @@ void main() {
         ),
       ),
       verify: (_) {
-        verify(() => mockAssignTaskToMember(
-              const AssignTaskParams(
-                  taskId: 'task-2', teamId: 'team-1', assigneeId: 'user-1'),
-            )).called(1);
+        verify(
+          () => mockAssignTaskToMember(
+            const AssignTaskParams(
+              taskId: 'task-2',
+              teamId: 'team-1',
+              assigneeId: 'user-1',
+            ),
+          ),
+        ).called(1);
       },
     );
   });

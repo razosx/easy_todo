@@ -21,18 +21,19 @@ class MemberAvatarList extends StatelessWidget {
 
     return SizedBox(
       height: avatarRadius * 2,
-      width: avatarRadius * 2 +
+      width:
+          avatarRadius * 2 +
           (memberList.length - 1) * (avatarRadius * 2 - overlap),
       child: Stack(
         children: List.generate(memberList.length, (i) {
           final member = memberList[i];
           final isAdmin = member.role == 'admin';
-          final displayName =
-              member.username ?? member.name ?? member.userId;
+          final displayName = member.username ?? member.name ?? member.userId;
           return Positioned(
             left: i * (avatarRadius * 2 - overlap),
             child: Tooltip(
-              message: displayName +
+              message:
+                  displayName +
                   (isAdmin
                       ? AppLocalizations.of(context)!.teamAdminSuffix
                       : ''),

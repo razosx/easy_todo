@@ -71,16 +71,13 @@ void main() {
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamLoaded] when user has a team',
       build: () {
-        when(() => mockGetTeam(any())).thenAnswer(
-          (_) => Stream.value(Right(tTeam)),
-        );
+        when(
+          () => mockGetTeam(any()),
+        ).thenAnswer((_) => Stream.value(Right(tTeam)));
         return teamBloc;
       },
       act: (bloc) => bloc.add(const LoadTeamRequested(userId: 'user-1')),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamLoaded>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamLoaded>()],
       verify: (bloc) {
         final state = bloc.state as TeamLoaded;
         expect(state.team.name, equals('Test Team'));
@@ -90,16 +87,13 @@ void main() {
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamNone] when user has no team',
       build: () {
-        when(() => mockGetTeam(any())).thenAnswer(
-          (_) => Stream.value(const Right(null)),
-        );
+        when(
+          () => mockGetTeam(any()),
+        ).thenAnswer((_) => Stream.value(const Right(null)));
         return teamBloc;
       },
       act: (bloc) => bloc.add(const LoadTeamRequested(userId: 'user-1')),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamNone>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamNone>()],
     );
 
     blocTest<TeamBloc, TeamState>(
@@ -111,10 +105,7 @@ void main() {
         return teamBloc;
       },
       act: (bloc) => bloc.add(const LoadTeamRequested(userId: 'user-1')),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamError>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamError>()],
     );
   });
 
@@ -122,17 +113,13 @@ void main() {
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamLoaded] when team is created successfully',
       build: () {
-        when(() => mockCreateTeam(any()))
-            .thenAnswer((_) async => Right(tTeam));
+        when(() => mockCreateTeam(any())).thenAnswer((_) async => Right(tTeam));
         return teamBloc;
       },
       act: (bloc) => bloc.add(
         const CreateTeamRequested(name: 'Test Team', userId: 'user-1'),
       ),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamLoaded>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamLoaded>()],
     );
 
     blocTest<TeamBloc, TeamState>(
@@ -146,10 +133,7 @@ void main() {
       act: (bloc) => bloc.add(
         const CreateTeamRequested(name: 'Test Team', userId: 'user-1'),
       ),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamError>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamError>()],
     );
   });
 
@@ -157,35 +141,29 @@ void main() {
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamLoaded] when join succeeds',
       build: () {
-        when(() => mockJoinTeam(any()))
-            .thenAnswer((_) async => Right(tTeam));
+        when(() => mockJoinTeam(any())).thenAnswer((_) async => Right(tTeam));
         return teamBloc;
       },
       act: (bloc) => bloc.add(
         const JoinTeamRequested(inviteCode: 'ABC123', userId: 'user-1'),
       ),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamLoaded>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamLoaded>()],
     );
 
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamError] when invite code is invalid',
       build: () {
         when(() => mockJoinTeam(any())).thenAnswer(
-          (_) async =>
-              const Left(ServerFailure(message: 'Código de invitación inválido')),
+          (_) async => const Left(
+            ServerFailure(message: 'Código de invitación inválido'),
+          ),
         );
         return teamBloc;
       },
       act: (bloc) => bloc.add(
         const JoinTeamRequested(inviteCode: 'XXXXX', userId: 'user-1'),
       ),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamError>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamError>()],
     );
   });
 
@@ -193,17 +171,15 @@ void main() {
     blocTest<TeamBloc, TeamState>(
       'emits [TeamLoading, TeamNone] when leave succeeds',
       build: () {
-        when(() => mockLeaveTeam(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => mockLeaveTeam(any()),
+        ).thenAnswer((_) async => const Right(null));
         return teamBloc;
       },
       act: (bloc) => bloc.add(
         const LeaveTeamRequested(teamId: 'team-1', userId: 'user-1'),
       ),
-      expect: () => [
-        isA<TeamLoading>(),
-        isA<TeamNone>(),
-      ],
+      expect: () => [isA<TeamLoading>(), isA<TeamNone>()],
     );
   });
 }

@@ -13,7 +13,11 @@ class CreateTeam extends UseCase<TeamEntity, CreateTeamParams> {
   @override
   Future<Either<Failure, TeamEntity>> call(CreateTeamParams params) {
     return repository.createTeam(
-        params.name, params.userId, params.username, params.memberName);
+      params.name,
+      params.userId,
+      params.username,
+      params.memberName,
+    );
   }
 }
 

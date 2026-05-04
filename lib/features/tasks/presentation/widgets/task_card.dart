@@ -59,8 +59,10 @@ class TaskCard extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () => Navigator.pop(ctx, true),
-                        child: Text(l10n.deleteButton,
-                            style: const TextStyle(color: Colors.red)),
+                        child: Text(
+                          l10n.deleteButton,
+                          style: const TextStyle(color: Colors.red),
+                        ),
                       ),
                     ],
                   );
@@ -114,10 +116,9 @@ class TaskCard extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           task.description,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.grey),
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(color: Colors.grey),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -126,14 +127,18 @@ class TaskCard extends StatelessWidget {
                         const SizedBox(height: 4),
                         Row(
                           children: [
-                            Icon(Icons.calendar_today,
-                                size: 12, color: Colors.grey.shade600),
+                            Icon(
+                              Icons.calendar_today,
+                              size: 12,
+                              color: Colors.grey.shade600,
+                            ),
                             const SizedBox(width: 4),
                             Text(
-                              DateFormat('d MMM', Localizations.localeOf(context).toString()).format(task.dueDate!),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
+                              DateFormat(
+                                'd MMM',
+                                Localizations.localeOf(context).toString(),
+                              ).format(task.dueDate!),
+                              style: Theme.of(context).textTheme.bodySmall
                                   ?.copyWith(color: Colors.grey.shade600),
                             ),
                           ],

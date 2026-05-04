@@ -198,5 +198,4 @@ class _EasyTodoAppState extends State<EasyTodoApp> {
       ),
     );
   }
-
 }

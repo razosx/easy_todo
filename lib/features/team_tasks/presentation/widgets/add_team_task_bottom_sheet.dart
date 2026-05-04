@@ -138,8 +138,10 @@ class _AddTeamTaskBottomSheetState extends State<AddTeamTaskBottomSheet> {
                     decoration: InputDecoration(
                       labelText: l10n.taskPriorityLabel,
                       border: const OutlineInputBorder(),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                     ),
                     items: TaskPriority.values.map((p) {
                       return DropdownMenuItem(
@@ -163,28 +165,28 @@ class _AddTeamTaskBottomSheetState extends State<AddTeamTaskBottomSheet> {
                 decoration: InputDecoration(
                   labelText: l10n.teamTaskAssignLabel,
                   border: const OutlineInputBorder(),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                 ),
                 items: [
                   DropdownMenuItem(
                     value: null,
                     child: Text(l10n.teamAssignUnassigned),
                   ),
-                  ...memberEntries.map((e) => DropdownMenuItem(
-                        value: e.key,
-                        child: Text(
-                            e.value.username ?? e.value.name ?? e.key),
-                      )),
+                  ...memberEntries.map(
+                    (e) => DropdownMenuItem(
+                      value: e.key,
+                      child: Text(e.value.username ?? e.value.name ?? e.key),
+                    ),
+                  ),
                 ],
                 onChanged: (v) => setState(() => _assignedTo = v),
               ),
             ],
             const SizedBox(height: 16),
-            FilledButton(
-              onPressed: _submit,
-              child: Text(l10n.addTaskButton),
-            ),
+            FilledButton(onPressed: _submit, child: Text(l10n.addTaskButton)),
           ],
         ),
       ),

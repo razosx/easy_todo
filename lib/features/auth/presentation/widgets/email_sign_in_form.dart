@@ -58,8 +58,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
       if (!mounted) return;
       result.fold(
         (_) => setState(() => _usernameStatus = _UsernameStatus.idle),
-        (available) => setState(() => _usernameStatus =
-            available ? _UsernameStatus.available : _UsernameStatus.taken),
+        (available) => setState(
+          () => _usernameStatus = available
+              ? _UsernameStatus.available
+              : _UsernameStatus.taken,
+        ),
       );
     });
   }
@@ -73,50 +76,59 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
 
     if (widget.isSignUp) {
       context.read<AuthBloc>().add(
-            SignUpWithEmailRequested(
-              email: email,
-              password: password,
-              name: _nameController.text.trim(),
-              username: _usernameController.text.trim().toLowerCase(),
-            ),
-          );
+        SignUpWithEmailRequested(
+          email: email,
+          password: password,
+          name: _nameController.text.trim(),
+          username: _usernameController.text.trim().toLowerCase(),
+        ),
+      );
     } else {
       context.read<AuthBloc>().add(
-            SignInWithEmailRequested(email: email, password: password),
-          );
+        SignInWithEmailRequested(email: email, password: password),
+      );
     }
   }
 
   Widget _buildUsernameStatus(AppLocalizations l10n) {
     return switch (_usernameStatus) {
       _UsernameStatus.checking => Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(
-                width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2)),
-            const SizedBox(width: 6),
-            Text(l10n.usernameChecking,
-                style: const TextStyle(fontSize: 12, color: Colors.grey)),
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(
+            width: 14,
+            height: 14,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            l10n.usernameChecking,
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+        ],
+      ),
       _UsernameStatus.available => Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.check_circle_outline, size: 16, color: Colors.green),
-            const SizedBox(width: 4),
-            Text(l10n.usernameAvailable,
-                style: const TextStyle(fontSize: 12, color: Colors.green)),
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.check_circle_outline, size: 16, color: Colors.green),
+          const SizedBox(width: 4),
+          Text(
+            l10n.usernameAvailable,
+            style: const TextStyle(fontSize: 12, color: Colors.green),
+          ),
+        ],
+      ),
       _UsernameStatus.taken => Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Icon(Icons.cancel_outlined, size: 16, color: Colors.red),
-            const SizedBox(width: 4),
-            Text(l10n.usernameTaken,
-                style: const TextStyle(fontSize: 12, color: Colors.red)),
-          ],
-        ),
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.cancel_outlined, size: 16, color: Colors.red),
+          const SizedBox(width: 4),
+          Text(
+            l10n.usernameTaken,
+            style: const TextStyle(fontSize: 12, color: Colors.red),
+          ),
+        ],
+      ),
       _UsernameStatus.idle => const SizedBox.shrink(),
     };
   }
@@ -239,9 +251,11 @@ class _EmailSignInFormState extends State<EmailSignInForm> {
                           width: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : Text(widget.isSignUp
-                          ? l10n.signUpButton
-                          : l10n.signInButton),
+                      : Text(
+                          widget.isSignUp
+                              ? l10n.signUpButton
+                              : l10n.signInButton,
+                        ),
                 ),
               ),
             ],

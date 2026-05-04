@@ -21,7 +21,7 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
   final FlutterLocalNotificationsPlugin _plugin;
 
   LocalNotificationServiceImpl({FlutterLocalNotificationsPlugin? plugin})
-      : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
+    : _plugin = plugin ?? FlutterLocalNotificationsPlugin();
 
   static const _channelId = 'easy_todo_channel';
   static const _channelName = 'Easy Todo Notifications';
@@ -41,15 +41,18 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
       requestBadgePermission: false,
       requestSoundPermission: false,
     );
-    const initSettings =
-        InitializationSettings(android: androidInit, iOS: iOSInit);
+    const initSettings = InitializationSettings(
+      android: androidInit,
+      iOS: iOSInit,
+    );
 
     await _plugin.initialize(settings: initSettings);
 
     // Create the notification channel (required on Android 8+).
     await _plugin
         .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
+          AndroidFlutterLocalNotificationsPlugin
+        >()
         ?.createNotificationChannel(
           const AndroidNotificationChannel(
             _channelId,
@@ -92,7 +95,8 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
     if (defaultTargetPlatform == TargetPlatform.android) {
       final androidImpl = _plugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       final canScheduleExact =
           await androidImpl?.canScheduleExactNotifications() ?? true;
       if (!canScheduleExact) {
@@ -138,13 +142,15 @@ class LocalNotificationServiceImpl implements LocalNotificationService {
     if (defaultTargetPlatform == TargetPlatform.android) {
       final androidImpl = _plugin
           .resolvePlatformSpecificImplementation<
-              AndroidFlutterLocalNotificationsPlugin>();
+            AndroidFlutterLocalNotificationsPlugin
+          >();
       final granted = await androidImpl?.requestNotificationsPermission();
       return granted ?? true;
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       final iosImpl = _plugin
           .resolvePlatformSpecificImplementation<
-              IOSFlutterLocalNotificationsPlugin>();
+            IOSFlutterLocalNotificationsPlugin
+          >();
       final granted = await iosImpl?.requestPermissions(
         alert: true,
         badge: true,

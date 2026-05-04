@@ -51,11 +51,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> checkUsernameAvailable(
-      String username) async {
+  Future<Either<Failure, bool>> checkUsernameAvailable(String username) async {
     try {
-      final available =
-          await remoteDataSource.checkUsernameAvailable(username);
+      final available = await remoteDataSource.checkUsernameAvailable(username);
       return Right(available);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));

@@ -71,19 +71,23 @@ void main() async {
   final authRepository = AuthRepositoryImpl(remoteDataSource: authDataSource);
 
   // Task dependencies
-  final taskDataSource =
-      TaskRemoteDataSourceImpl(firestore: FirebaseFirestore.instance);
+  final taskDataSource = TaskRemoteDataSourceImpl(
+    firestore: FirebaseFirestore.instance,
+  );
   final taskRepository = TaskRepositoryImpl(remoteDataSource: taskDataSource);
 
   // Team dependencies
-  final teamDataSource =
-      TeamRemoteDataSourceImpl(firestore: FirebaseFirestore.instance);
+  final teamDataSource = TeamRemoteDataSourceImpl(
+    firestore: FirebaseFirestore.instance,
+  );
   final teamRepository = TeamRepositoryImpl(remoteDataSource: teamDataSource);
 
-  final teamTaskDataSource =
-      TeamTaskRemoteDataSourceImpl(firestore: FirebaseFirestore.instance);
-  final teamTaskRepository =
-      TeamTaskRepositoryImpl(remoteDataSource: teamTaskDataSource);
+  final teamTaskDataSource = TeamTaskRemoteDataSourceImpl(
+    firestore: FirebaseFirestore.instance,
+  );
+  final teamTaskRepository = TeamTaskRepositoryImpl(
+    remoteDataSource: teamTaskDataSource,
+  );
 
   runApp(
     EasyTodoApp(

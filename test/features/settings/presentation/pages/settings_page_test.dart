@@ -76,10 +76,10 @@ void main() {
   }
 
   testWidgets('shows user info when authenticated', (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildSubject());
     await tester.pump();
@@ -89,10 +89,10 @@ void main() {
   });
 
   testWidgets('shows notifications toggle', (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildSubject());
     await tester.pump();
@@ -102,10 +102,10 @@ void main() {
   });
 
   testWidgets('shows theme dropdown with all 5 options', (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildSubject());
     await tester.pump();
@@ -125,10 +125,10 @@ void main() {
   });
 
   testWidgets('selecting Desierto emits AppTheme.desierto', (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
 
     await tester.pumpWidget(buildSubject());
     await tester.pump();
@@ -142,12 +142,13 @@ void main() {
     expect(themeCubit.state, AppTheme.desierto);
   });
 
-  testWidgets('dispatches SignOutRequested when logout confirmed',
-      (tester) async {
-    when(() => mockAuthBloc.state)
-        .thenReturn(const AuthAuthenticated(user: tUser));
-    when(() => mockAuthBloc.stream)
-        .thenAnswer((_) => const Stream.empty());
+  testWidgets('dispatches SignOutRequested when logout confirmed', (
+    tester,
+  ) async {
+    when(
+      () => mockAuthBloc.state,
+    ).thenReturn(const AuthAuthenticated(user: tUser));
+    when(() => mockAuthBloc.stream).thenAnswer((_) => const Stream.empty());
     when(() => mockAuthBloc.add(any())).thenReturn(null);
 
     await tester.pumpWidget(buildSubject());

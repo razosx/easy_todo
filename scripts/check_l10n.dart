@@ -57,5 +57,7 @@ void main() {
     exit(1);
   }
 
-  stdout.writeln('✅  app_en.arb and app_es.arb are in sync (${enKeys.length} keys).');
+  stdout.writeln(
+    '✅  app_en.arb and app_es.arb are in sync (${enKeys.length} keys).',
+  );
 }

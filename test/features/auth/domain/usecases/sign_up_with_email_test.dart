@@ -26,32 +26,39 @@ void main() {
   });
 
   test('should return UserEntity when sign up succeeds', () async {
-    when(() => mockRepository.signUpWithEmail(
-          email: any(named: 'email'),
-          password: any(named: 'password'),
-          name: any(named: 'name'),
-          username: any(named: 'username'),
-        )).thenAnswer((_) async => const Right(tUser));
+    when(
+      () => mockRepository.signUpWithEmail(
+        email: any(named: 'email'),
+        password: any(named: 'password'),
+        name: any(named: 'name'),
+        username: any(named: 'username'),
+      ),
+    ).thenAnswer((_) async => const Right(tUser));
 
     final result = await usecase(tParams);
 
     expect(result, const Right(tUser));
-    verify(() => mockRepository.signUpWithEmail(
-          email: 'new@test.com',
-          password: 'password123',
-          name: 'Test User',
-          username: 'testuser',
-        )).called(1);
+    verify(
+      () => mockRepository.signUpWithEmail(
+        email: 'new@test.com',
+        password: 'password123',
+        name: 'Test User',
+        username: 'testuser',
+      ),
+    ).called(1);
   });
 
   test('should return AuthFailure when email already in use', () async {
-    when(() => mockRepository.signUpWithEmail(
-          email: any(named: 'email'),
-          password: any(named: 'password'),
-          name: any(named: 'name'),
-          username: any(named: 'username'),
-        )).thenAnswer((_) async =>
-        const Left(AuthFailure(message: 'Email already in use')));
+    when(
+      () => mockRepository.signUpWithEmail(
+        email: any(named: 'email'),
+        password: any(named: 'password'),
+        name: any(named: 'name'),
+        username: any(named: 'username'),
+      ),
+    ).thenAnswer(
+      (_) async => const Left(AuthFailure(message: 'Email already in use')),
+    );
 
     final result = await usecase(tParams);
 

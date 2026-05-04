@@ -18,7 +18,7 @@ class TeamTaskRemoteDataSourceImpl implements TeamTaskRemoteDataSource {
   final FirebaseFirestore _firestore;
 
   TeamTaskRemoteDataSourceImpl({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+    : _firestore = firestore;
 
   CollectionReference<Map<String, dynamic>> _tasksCollection(String teamId) =>
       _firestore.collection('teams').doc(teamId).collection('tasks');
@@ -28,9 +28,11 @@ class TeamTaskRemoteDataSourceImpl implements TeamTaskRemoteDataSource {
     return _tasksCollection(teamId)
         .orderBy('createdAt', descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => TeamTaskModel.fromFirestore(doc, teamId))
-            .toList());
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => TeamTaskModel.fromFirestore(doc, teamId))
+              .toList(),
+        );
   }
 
   @override
@@ -52,9 +54,9 @@ class TeamTaskRemoteDataSourceImpl implements TeamTaskRemoteDataSource {
     String? assigneeId,
   ) async {
     try {
-      await _tasksCollection(teamId).doc(taskId).update({
-        'assignedTo': assigneeId,
-      });
+      await _tasksCollection(
+        teamId,
+      ).doc(taskId).update({'assignedTo': assigneeId});
       final doc = await _tasksCollection(teamId).doc(taskId).get();
       return TeamTaskModel.fromFirestore(doc, teamId);
     } catch (e) {

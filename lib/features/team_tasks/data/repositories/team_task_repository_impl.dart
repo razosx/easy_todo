@@ -21,7 +21,8 @@ class TeamTaskRepositoryImpl implements TeamTaskRepository {
 
   @override
   Future<Either<Failure, TeamTaskEntity>> createTeamTask(
-      TeamTaskEntity task) async {
+    TeamTaskEntity task,
+  ) async {
     try {
       final model = TeamTaskModel.fromEntity(task);
       final result = await remoteDataSource.createTeamTask(model);
@@ -38,8 +39,11 @@ class TeamTaskRepositoryImpl implements TeamTaskRepository {
     String? assigneeId,
   ) async {
     try {
-      final result =
-          await remoteDataSource.assignTask(taskId, teamId, assigneeId);
+      final result = await remoteDataSource.assignTask(
+        taskId,
+        teamId,
+        assigneeId,
+      );
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -52,8 +56,7 @@ class TeamTaskRepositoryImpl implements TeamTaskRepository {
     String teamId,
   ) async {
     try {
-      final result =
-          await remoteDataSource.completeTeamTask(taskId, teamId);
+      final result = await remoteDataSource.completeTeamTask(taskId, teamId);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));
@@ -62,7 +65,9 @@ class TeamTaskRepositoryImpl implements TeamTaskRepository {
 
   @override
   Future<Either<Failure, void>> deleteTeamTask(
-      String taskId, String teamId) async {
+    String taskId,
+    String teamId,
+  ) async {
     try {
       await remoteDataSource.deleteTeamTask(taskId, teamId);
       return const Right(null);

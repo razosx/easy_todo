@@ -30,13 +30,13 @@ class _JoinTeamPageState extends State<JoinTeamPage> {
     if (authState is! AuthAuthenticated) return;
 
     context.read<TeamBloc>().add(
-          JoinTeamRequested(
-            inviteCode: _codeController.text.trim().toUpperCase(),
-            userId: authState.user.id,
-            username: authState.user.username,
-            memberName: authState.user.name,
-          ),
-        );
+      JoinTeamRequested(
+        inviteCode: _codeController.text.trim().toUpperCase(),
+        userId: authState.user.id,
+        username: authState.user.username,
+        memberName: authState.user.name,
+      ),
+    );
   }
 
   @override
@@ -68,9 +68,8 @@ class _JoinTeamPageState extends State<JoinTeamPage> {
                   Text(
                     l10n.joinTeamDescription,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   TextFormField(

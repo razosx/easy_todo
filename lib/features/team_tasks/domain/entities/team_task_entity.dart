@@ -52,15 +52,15 @@ class TeamTaskEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        teamId,
-        title,
-        description,
-        assignedTo,
-        createdBy,
-        dueDate,
-        isCompleted,
-        createdAt,
-        priority,
-      ];
+    id,
+    teamId,
+    title,
+    description,
+    assignedTo,
+    createdBy,
+    dueDate,
+    isCompleted,
+    createdAt,
+    priority,
+  ];
 }

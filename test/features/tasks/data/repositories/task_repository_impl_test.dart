@@ -36,60 +36,68 @@ void main() {
 
   group('getTasks', () {
     test('should return stream of tasks when data source succeeds', () async {
-      when(() => mockDataSource.getTasks(any()))
-          .thenAnswer((_) => Stream.value([tTaskModel]));
+      when(
+        () => mockDataSource.getTasks(any()),
+      ).thenAnswer((_) => Stream.value([tTaskModel]));
 
       final result = await repository.getTasks('user-1').first;
 
       expect(result.isRight(), isTrue);
-      result.fold(
-        (_) => fail('Expected Right'),
-        (tasks) {
-          expect(tasks.length, 1);
-          expect(tasks.first.title, 'Test Task');
-        },
-      );
+      result.fold((_) => fail('Expected Right'), (tasks) {
+        expect(tasks.length, 1);
+        expect(tasks.first.title, 'Test Task');
+      });
     });
   });
 
   group('createTask', () {
     test('should return TaskEntity when creation succeeds', () async {
-      when(() => mockDataSource.createTask(any()))
-          .thenAnswer((_) async => tTaskModel);
+      when(
+        () => mockDataSource.createTask(any()),
+      ).thenAnswer((_) async => tTaskModel);
 
       final result = await repository.createTask(tTaskEntity);
 
       expect(result, Right<Failure, TaskEntity>(tTaskModel));
     });
 
-    test('should return ServerFailure when ServerException is thrown', () async {
-      when(() => mockDataSource.createTask(any()))
-          .thenThrow(const ServerException(message: 'Create error'));
+    test(
+      'should return ServerFailure when ServerException is thrown',
+      () async {
+        when(
+          () => mockDataSource.createTask(any()),
+        ).thenThrow(const ServerException(message: 'Create error'));
 
-      final result = await repository.createTask(tTaskEntity);
+        final result = await repository.createTask(tTaskEntity);
 
-      expect(result, const Left(ServerFailure(message: 'Create error')));
-    });
+        expect(result, const Left(ServerFailure(message: 'Create error')));
+      },
+    );
   });
 
   group('deleteTask', () {
     test('should return void when deletion succeeds', () async {
-      when(() => mockDataSource.deleteTask(any(), any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockDataSource.deleteTask(any(), any()),
+      ).thenAnswer((_) async {});
 
       final result = await repository.deleteTask('task-1', 'user-1');
 
       expect(result, const Right(null));
     });
 
-    test('should return ServerFailure when ServerException is thrown', () async {
-      when(() => mockDataSource.deleteTask(any(), any()))
-          .thenThrow(const ServerException(message: 'Delete error'));
+    test(
+      'should return ServerFailure when ServerException is thrown',
+      () async {
+        when(
+          () => mockDataSource.deleteTask(any(), any()),
+        ).thenThrow(const ServerException(message: 'Delete error'));
 
-      final result = await repository.deleteTask('task-1', 'user-1');
+        final result = await repository.deleteTask('task-1', 'user-1');
 
-      expect(result, const Left(ServerFailure(message: 'Delete error')));
-    });
+        expect(result, const Left(ServerFailure(message: 'Delete error')));
+      },
+    );
   });
 
   group('completeTask', () {
@@ -101,8 +109,9 @@ void main() {
         isCompleted: true,
         createdAt: tCreatedAt,
       );
-      when(() => mockDataSource.completeTask(any(), any()))
-          .thenAnswer((_) async => completedModel);
+      when(
+        () => mockDataSource.completeTask(any(), any()),
+      ).thenAnswer((_) async => completedModel);
 
       final result = await repository.completeTask('task-1', 'user-1');
 

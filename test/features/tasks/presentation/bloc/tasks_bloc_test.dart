@@ -15,10 +15,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockGetTasks extends Mock implements GetTasks {}
+
 class MockCreateTask extends Mock implements CreateTask {}
+
 class MockUpdateTask extends Mock implements UpdateTask {}
+
 class MockDeleteTask extends Mock implements DeleteTask {}
+
 class MockCompleteTask extends Mock implements CompleteTask {}
+
 class MockLocalNotificationService extends Mock
     implements LocalNotificationService {}
 
@@ -89,30 +94,26 @@ void main() {
       'emits [TasksLoading, TasksLoaded] when tasks load successfully',
       build: () {
         when(() => mockGetTasks(any())).thenAnswer(
-          (_) => Stream.value(Right([tTodayTask, tUpcomingTask, tCompletedTask])),
+          (_) =>
+              Stream.value(Right([tTodayTask, tUpcomingTask, tCompletedTask])),
         );
         return tasksBloc;
       },
       act: (bloc) => bloc.add(const LoadTasksRequested(userId: 'user-1')),
-      expect: () => [
-        isA<TasksLoading>(),
-        isA<TasksLoaded>(),
-      ],
+      expect: () => [isA<TasksLoading>(), isA<TasksLoaded>()],
     );
 
     blocTest<TasksBloc, TasksState>(
       'groups tasks correctly into today/upcoming/completed',
       build: () {
         when(() => mockGetTasks(any())).thenAnswer(
-          (_) => Stream.value(Right([tTodayTask, tUpcomingTask, tCompletedTask])),
+          (_) =>
+              Stream.value(Right([tTodayTask, tUpcomingTask, tCompletedTask])),
         );
         return tasksBloc;
       },
       act: (bloc) => bloc.add(const LoadTasksRequested(userId: 'user-1')),
-      expect: () => [
-        TasksLoading(),
-        isA<TasksLoaded>(),
-      ],
+      expect: () => [TasksLoading(), isA<TasksLoaded>()],
       verify: (bloc) {
         final state = bloc.state as TasksLoaded;
         expect(state.todayTasks, contains(tTodayTask));
@@ -130,10 +131,7 @@ void main() {
         return tasksBloc;
       },
       act: (bloc) => bloc.add(const LoadTasksRequested(userId: 'user-1')),
-      expect: () => [
-        isA<TasksLoading>(),
-        isA<TasksError>(),
-      ],
+      expect: () => [isA<TasksLoading>(), isA<TasksError>()],
     );
   });
 
@@ -141,17 +139,20 @@ void main() {
     blocTest<TasksBloc, TasksState>(
       'calls deleteTask use case with correct params',
       build: () {
-        when(() => mockDeleteTask(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => mockDeleteTask(any()),
+        ).thenAnswer((_) async => const Right(null));
         return tasksBloc;
       },
       act: (bloc) => bloc.add(
         const DeleteTaskRequested(taskId: 'task-1', userId: 'user-1'),
       ),
       verify: (_) {
-        verify(() => mockDeleteTask(
-              const DeleteTaskParams(taskId: 'task-1', userId: 'user-1'),
-            )).called(1);
+        verify(
+          () => mockDeleteTask(
+            const DeleteTaskParams(taskId: 'task-1', userId: 'user-1'),
+          ),
+        ).called(1);
       },
     );
   });
@@ -160,17 +161,20 @@ void main() {
     blocTest<TasksBloc, TasksState>(
       'calls completeTask use case with correct params',
       build: () {
-        when(() => mockCompleteTask(any()))
-            .thenAnswer((_) async => Right(tCompletedTask));
+        when(
+          () => mockCompleteTask(any()),
+        ).thenAnswer((_) async => Right(tCompletedTask));
         return tasksBloc;
       },
       act: (bloc) => bloc.add(
         const CompleteTaskRequested(taskId: 'done-1', userId: 'user-1'),
       ),
       verify: (_) {
-        verify(() => mockCompleteTask(
-              const CompleteTaskParams(taskId: 'done-1', userId: 'user-1'),
-            )).called(1);
+        verify(
+          () => mockCompleteTask(
+            const CompleteTaskParams(taskId: 'done-1', userId: 'user-1'),
+          ),
+        ).called(1);
       },
     );
   });
@@ -194,47 +198,59 @@ void main() {
     blocTest<TasksBloc, TasksState>(
       'schedules notification when task has notificationId',
       build: () {
-        when(() => mockCreateTask(any()))
-            .thenAnswer((_) async => Right(tTaskWithNotification));
-        when(() => mockNotificationService.scheduleTaskNotification(
-              tTaskWithNotification,
-              title: any(named: 'title'),
-              body: any(named: 'body'),
-            )).thenAnswer((_) async {});
+        when(
+          () => mockCreateTask(any()),
+        ).thenAnswer((_) async => Right(tTaskWithNotification));
+        when(
+          () => mockNotificationService.scheduleTaskNotification(
+            tTaskWithNotification,
+            title: any(named: 'title'),
+            body: any(named: 'body'),
+          ),
+        ).thenAnswer((_) async {});
         return tasksBloc;
       },
-      act: (bloc) => bloc.add(CreateTaskRequested(
-        task: tTaskWithNotification,
-        notificationTitle: 'Test title',
-        notificationBody: 'Test body',
-      )),
+      act: (bloc) => bloc.add(
+        CreateTaskRequested(
+          task: tTaskWithNotification,
+          notificationTitle: 'Test title',
+          notificationBody: 'Test body',
+        ),
+      ),
       verify: (_) {
-        verify(() => mockNotificationService.scheduleTaskNotification(
-              tTaskWithNotification,
-              title: any(named: 'title'),
-              body: any(named: 'body'),
-            )).called(1);
+        verify(
+          () => mockNotificationService.scheduleTaskNotification(
+            tTaskWithNotification,
+            title: any(named: 'title'),
+            body: any(named: 'body'),
+          ),
+        ).called(1);
       },
     );
 
     blocTest<TasksBloc, TasksState>(
       'does not schedule notification when notificationId is null',
       build: () {
-        when(() => mockCreateTask(any()))
-            .thenAnswer((_) async => Right(tTaskWithoutNotification));
+        when(
+          () => mockCreateTask(any()),
+        ).thenAnswer((_) async => Right(tTaskWithoutNotification));
         return tasksBloc;
       },
-      act: (bloc) => bloc.add(CreateTaskRequested(
-        task: tTaskWithoutNotification,
-        notificationTitle: 'Test title',
-        notificationBody: 'Test body',
-      )),
+      act: (bloc) => bloc.add(
+        CreateTaskRequested(
+          task: tTaskWithoutNotification,
+          notificationTitle: 'Test title',
+          notificationBody: 'Test body',
+        ),
+      ),
       verify: (_) {
-        verifyNever(() => mockNotificationService.scheduleTaskNotification(
-              any(),
-              title: any(named: 'title'),
-              body: any(named: 'body'),
-            ));
+        verifyNever(
+          () => mockNotificationService.scheduleTaskNotification(
+            any(),
+            title: any(named: 'title'),
+            body: any(named: 'body'),
+          ),
+        );
       },
     );
   });
@@ -246,10 +262,12 @@ void main() {
         when(() => mockGetTasks(any())).thenAnswer(
           (_) => Stream.value(Right([tTodayTask.copyWith(notificationId: 99)])),
         );
-        when(() => mockDeleteTask(any()))
-            .thenAnswer((_) async => const Right(null));
-        when(() => mockNotificationService.cancelNotification(99))
-            .thenAnswer((_) async {});
+        when(
+          () => mockDeleteTask(any()),
+        ).thenAnswer((_) async => const Right(null));
+        when(
+          () => mockNotificationService.cancelNotification(99),
+        ).thenAnswer((_) async {});
         return tasksBloc;
       },
       act: (bloc) async {

@@ -13,7 +13,11 @@ void main() {
   late SignInWithGoogle usecase;
   late MockAuthRepository mockRepository;
 
-  const tUser = UserEntity(id: 'uid-1', email: 'google@test.com', displayName: 'Google User');
+  const tUser = UserEntity(
+    id: 'uid-1',
+    email: 'google@test.com',
+    displayName: 'Google User',
+  );
 
   setUp(() {
     mockRepository = MockAuthRepository();
@@ -21,8 +25,9 @@ void main() {
   });
 
   test('should return UserEntity when Google sign in succeeds', () async {
-    when(() => mockRepository.signInWithGoogle())
-        .thenAnswer((_) async => const Right(tUser));
+    when(
+      () => mockRepository.signInWithGoogle(),
+    ).thenAnswer((_) async => const Right(tUser));
 
     final result = await usecase(const NoParams());
 
@@ -32,8 +37,9 @@ void main() {
   });
 
   test('should return AuthFailure when Google sign in is cancelled', () async {
-    when(() => mockRepository.signInWithGoogle())
-        .thenAnswer((_) async => const Left(AuthFailure(message: 'Sign in cancelled')));
+    when(() => mockRepository.signInWithGoogle()).thenAnswer(
+      (_) async => const Left(AuthFailure(message: 'Sign in cancelled')),
+    );
 
     final result = await usecase(const NoParams());
 
@@ -41,8 +47,9 @@ void main() {
   });
 
   test('should return ServerFailure when a server error occurs', () async {
-    when(() => mockRepository.signInWithGoogle())
-        .thenAnswer((_) async => const Left(ServerFailure(message: 'Server error')));
+    when(() => mockRepository.signInWithGoogle()).thenAnswer(
+      (_) async => const Left(ServerFailure(message: 'Server error')),
+    );
 
     final result = await usecase(const NoParams());
 

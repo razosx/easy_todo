@@ -18,7 +18,9 @@ void main() {
     group('requestPermission', () {
       test('returns true when permission is granted', () async {
         final settings = _fakeSettings(AuthorizationStatus.authorized);
-        when(() => mockMessaging.requestPermission()).thenAnswer((_) async => settings);
+        when(
+          () => mockMessaging.requestPermission(),
+        ).thenAnswer((_) async => settings);
 
         final result = await service.requestPermission();
 
@@ -27,27 +29,36 @@ void main() {
 
       test('returns false when permission is denied', () async {
         final settings = _fakeSettings(AuthorizationStatus.denied);
-        when(() => mockMessaging.requestPermission()).thenAnswer((_) async => settings);
+        when(
+          () => mockMessaging.requestPermission(),
+        ).thenAnswer((_) async => settings);
 
         final result = await service.requestPermission();
 
         expect(result, isFalse);
       });
 
-      test('returns true when permission is provisional (iOS quiet delivery)', () async {
-        final settings = _fakeSettings(AuthorizationStatus.provisional);
-        when(() => mockMessaging.requestPermission()).thenAnswer((_) async => settings);
+      test(
+        'returns true when permission is provisional (iOS quiet delivery)',
+        () async {
+          final settings = _fakeSettings(AuthorizationStatus.provisional);
+          when(
+            () => mockMessaging.requestPermission(),
+          ).thenAnswer((_) async => settings);
 
-        final result = await service.requestPermission();
+          final result = await service.requestPermission();
 
-        // provisional counts as granted (iOS shows notifications quietly)
-        expect(result, isTrue);
-      });
+          // provisional counts as granted (iOS shows notifications quietly)
+          expect(result, isTrue);
+        },
+      );
     });
 
     group('getToken', () {
       test('returns FCM token string when available', () async {
-        when(() => mockMessaging.getToken()).thenAnswer((_) async => 'fake-fcm-token-123');
+        when(
+          () => mockMessaging.getToken(),
+        ).thenAnswer((_) async => 'fake-fcm-token-123');
 
         final token = await service.getToken();
 
@@ -66,8 +77,9 @@ void main() {
     group('subscribeToTokenRefresh', () {
       test('calls onTokenRefresh stream from FirebaseMessaging', () async {
         const newToken = 'refreshed-token-456';
-        when(() => mockMessaging.onTokenRefresh)
-            .thenAnswer((_) => Stream.value(newToken));
+        when(
+          () => mockMessaging.onTokenRefresh,
+        ).thenAnswer((_) => Stream.value(newToken));
 
         final tokens = <String>[];
         service.subscribeToTokenRefresh((token) => tokens.add(token));

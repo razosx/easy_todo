@@ -62,13 +62,15 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       notificationId: notificationId,
     );
 
-    context.read<TasksBloc>().add(CreateTaskRequested(
-          task: task,
-          notificationTitle: l10n.notificationTitle(task.title),
-          notificationBody: task.description.isNotEmpty
-              ? task.description
-              : l10n.notificationDefaultBody,
-        ));
+    context.read<TasksBloc>().add(
+      CreateTaskRequested(
+        task: task,
+        notificationTitle: l10n.notificationTitle(task.title),
+        notificationBody: task.description.isNotEmpty
+            ? task.description
+            : l10n.notificationDefaultBody,
+      ),
+    );
     Navigator.pop(context);
   }
 
@@ -121,10 +123,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text(
-              l10n.homeTitle,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text(l10n.homeTitle, style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 16),
             TextFormField(
               controller: _titleController,
@@ -177,8 +176,10 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     decoration: InputDecoration(
                       labelText: l10n.taskPriorityLabel,
                       border: const OutlineInputBorder(),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                     ),
                     items: TaskPriority.values.map((p) {
                       return DropdownMenuItem(
@@ -209,7 +210,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                 ),
                 title: Text(
                   _notificationEnabled && _notificationTime != null
-                      ? l10n.taskNotificationAt(_notificationTime!.format(context))
+                      ? l10n.taskNotificationAt(
+                          _notificationTime!.format(context),
+                        )
                       : l10n.taskScheduleNotification,
                 ),
                 value: _notificationEnabled,
@@ -217,10 +220,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               ),
             ],
             const SizedBox(height: 8),
-            FilledButton(
-              onPressed: _submit,
-              child: Text(l10n.addTaskButton),
-            ),
+            FilledButton(onPressed: _submit, child: Text(l10n.addTaskButton)),
           ],
         ),
       ),

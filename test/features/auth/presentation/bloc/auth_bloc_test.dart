@@ -15,9 +15,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
+
 class MockSignInWithEmail extends Mock implements SignInWithEmail {}
+
 class MockSignUpWithEmail extends Mock implements SignUpWithEmail {}
+
 class MockSignInWithGoogle extends Mock implements SignInWithGoogle {}
+
 class MockSignOut extends Mock implements SignOut {}
 
 void main() {
@@ -32,8 +36,14 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(const SignInWithEmailParams(email: '', password: ''));
-    registerFallbackValue(const SignUpWithEmailParams(
-        email: '', password: '', name: '', username: ''));
+    registerFallbackValue(
+      const SignUpWithEmailParams(
+        email: '',
+        password: '',
+        name: '',
+        username: '',
+      ),
+    );
     registerFallbackValue(const NoParams());
   });
 
@@ -62,18 +72,18 @@ void main() {
     blocTest<AuthBloc, AuthState>(
       'emits [AuthLoading, AuthAuthenticated] when sign in succeeds',
       build: () {
-        when(() => mockSignInWithEmail(any()))
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockSignInWithEmail(any()),
+        ).thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
-      act: (bloc) => bloc.add(const SignInWithEmailRequested(
-        email: 'test@test.com',
-        password: '123456',
-      )),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthAuthenticated>(),
-      ],
+      act: (bloc) => bloc.add(
+        const SignInWithEmailRequested(
+          email: 'test@test.com',
+          password: '123456',
+        ),
+      ),
+      expect: () => [isA<AuthLoading>(), isA<AuthAuthenticated>()],
       verify: (_) {
         verify(() => mockSignInWithEmail(any())).called(1);
       },
@@ -83,34 +93,34 @@ void main() {
       'emits [AuthLoading, AuthError] when sign in fails',
       build: () {
         when(() => mockSignInWithEmail(any())).thenAnswer(
-            (_) async => const Left(AuthFailure(message: 'Invalid credentials')));
+          (_) async => const Left(AuthFailure(message: 'Invalid credentials')),
+        );
         return authBloc;
       },
-      act: (bloc) => bloc.add(const SignInWithEmailRequested(
-        email: 'test@test.com',
-        password: 'wrong',
-      )),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthError>(),
-      ],
+      act: (bloc) => bloc.add(
+        const SignInWithEmailRequested(
+          email: 'test@test.com',
+          password: 'wrong',
+        ),
+      ),
+      expect: () => [isA<AuthLoading>(), isA<AuthError>()],
     );
 
     blocTest<AuthBloc, AuthState>(
       'emits AuthAuthenticated with correct user',
       build: () {
-        when(() => mockSignInWithEmail(any()))
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockSignInWithEmail(any()),
+        ).thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
-      act: (bloc) => bloc.add(const SignInWithEmailRequested(
-        email: 'test@test.com',
-        password: '123456',
-      )),
-      expect: () => [
-        AuthLoading(),
-        const AuthAuthenticated(user: tUser),
-      ],
+      act: (bloc) => bloc.add(
+        const SignInWithEmailRequested(
+          email: 'test@test.com',
+          password: '123456',
+        ),
+      ),
+      expect: () => [AuthLoading(), const AuthAuthenticated(user: tUser)],
     );
   });
 
@@ -118,39 +128,39 @@ void main() {
     blocTest<AuthBloc, AuthState>(
       'emits [AuthLoading, AuthAuthenticated] when sign up succeeds',
       build: () {
-        when(() => mockSignUpWithEmail(any()))
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockSignUpWithEmail(any()),
+        ).thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
-      act: (bloc) => bloc.add(const SignUpWithEmailRequested(
-        email: 'new@test.com',
-        password: 'password123',
-        name: 'Test User',
-        username: 'testuser',
-      )),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthAuthenticated>(),
-      ],
+      act: (bloc) => bloc.add(
+        const SignUpWithEmailRequested(
+          email: 'new@test.com',
+          password: 'password123',
+          name: 'Test User',
+          username: 'testuser',
+        ),
+      ),
+      expect: () => [isA<AuthLoading>(), isA<AuthAuthenticated>()],
     );
 
     blocTest<AuthBloc, AuthState>(
       'emits [AuthLoading, AuthError] when sign up fails',
       build: () {
         when(() => mockSignUpWithEmail(any())).thenAnswer(
-            (_) async => const Left(AuthFailure(message: 'Email already in use')));
+          (_) async => const Left(AuthFailure(message: 'Email already in use')),
+        );
         return authBloc;
       },
-      act: (bloc) => bloc.add(const SignUpWithEmailRequested(
-        email: 'existing@test.com',
-        password: 'password123',
-        name: 'Test User',
-        username: 'existinguser',
-      )),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthError>(),
-      ],
+      act: (bloc) => bloc.add(
+        const SignUpWithEmailRequested(
+          email: 'existing@test.com',
+          password: 'password123',
+          name: 'Test User',
+          username: 'existinguser',
+        ),
+      ),
+      expect: () => [isA<AuthLoading>(), isA<AuthError>()],
     );
   });
 
@@ -158,15 +168,13 @@ void main() {
     blocTest<AuthBloc, AuthState>(
       'emits [AuthLoading, AuthAuthenticated] when Google sign in succeeds',
       build: () {
-        when(() => mockSignInWithGoogle(any()))
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockSignInWithGoogle(any()),
+        ).thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
       act: (bloc) => bloc.add(SignInWithGoogleRequested()),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthAuthenticated>(),
-      ],
+      expect: () => [isA<AuthLoading>(), isA<AuthAuthenticated>()],
     );
   });
 
@@ -174,15 +182,13 @@ void main() {
     blocTest<AuthBloc, AuthState>(
       'emits [AuthLoading, AuthUnauthenticated] when sign out succeeds',
       build: () {
-        when(() => mockSignOut(any()))
-            .thenAnswer((_) async => const Right(null));
+        when(
+          () => mockSignOut(any()),
+        ).thenAnswer((_) async => const Right(null));
         return authBloc;
       },
       act: (bloc) => bloc.add(SignOutRequested()),
-      expect: () => [
-        isA<AuthLoading>(),
-        isA<AuthUnauthenticated>(),
-      ],
+      expect: () => [isA<AuthLoading>(), isA<AuthUnauthenticated>()],
     );
   });
 
@@ -191,8 +197,9 @@ void main() {
       'emits AuthAuthenticated when current user exists',
       build: () {
         when(() => mockAuthRepository.currentUser).thenReturn(tUser);
-        when(() => mockAuthRepository.getFullCurrentUser())
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockAuthRepository.getFullCurrentUser(),
+        ).thenAnswer((_) async => const Right(tUser));
         return authBloc;
       },
       act: (bloc) => bloc.add(AuthCheckRequested()),

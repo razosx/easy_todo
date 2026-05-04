@@ -33,8 +33,7 @@ class TeamTaskCard extends StatelessWidget {
         title: Text(
           task.title,
           style: TextStyle(
-            decoration:
-                task.isCompleted ? TextDecoration.lineThrough : null,
+            decoration: task.isCompleted ? TextDecoration.lineThrough : null,
             color: task.isCompleted
                 ? theme.colorScheme.onSurface.withAlpha(128)
                 : null,
@@ -69,8 +68,7 @@ class TeamTaskCard extends StatelessWidget {
     }
     if (task.assignedTo != null) {
       final member = members[task.assignedTo];
-      final displayName =
-          member?.username ?? member?.name ?? task.assignedTo!;
+      final displayName = member?.username ?? member?.name ?? task.assignedTo!;
       parts.add('→ $displayName');
     }
     if (parts.isEmpty) return null;

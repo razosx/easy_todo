@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 enum AppTheme {
-  system,   // DeepPurple, sigue preferencia del SO
-  light,    // DeepPurple claro forzado
-  dark,     // DeepPurple oscuro forzado
+  system, // DeepPurple, sigue preferencia del SO
+  light, // DeepPurple claro forzado
+  dark, // DeepPurple oscuro forzado
   desierto, // Paleta tierra/dorado, sigue SO
-  bosque,   // Paleta verde/morado, sigue SO
+  bosque, // Paleta verde/morado, sigue SO
 }
 
 class AppThemeData {
@@ -13,10 +13,10 @@ class AppThemeData {
 
   // ── ThemeMode mapping ────────────────────────────────────────────────────
   static ThemeMode themeMode(AppTheme t) => switch (t) {
-        AppTheme.light => ThemeMode.light,
-        AppTheme.dark => ThemeMode.dark,
-        _ => ThemeMode.system,
-      };
+    AppTheme.light => ThemeMode.light,
+    AppTheme.dark => ThemeMode.dark,
+    _ => ThemeMode.system,
+  };
 
   // ── ThemeData claro ──────────────────────────────────────────────────────
   static ThemeData light(AppTheme t) {
@@ -154,23 +154,19 @@ class AppThemeData {
       cardTheme: CardThemeData(
         elevation: 2,
         color: cs.surfaceContainerLow,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: cs.secondaryContainer,
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: WidgetStateProperty.resolveWith(
-          (states) =>
-              states.contains(WidgetState.selected) ? cs.primary : null,
+          (states) => states.contains(WidgetState.selected) ? cs.primary : null,
         ),
       ),
       switchTheme: SwitchThemeData(
         thumbColor: WidgetStateProperty.resolveWith(
-          (states) =>
-              states.contains(WidgetState.selected) ? cs.primary : null,
+          (states) => states.contains(WidgetState.selected) ? cs.primary : null,
         ),
         trackColor: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)

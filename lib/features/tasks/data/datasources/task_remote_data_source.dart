@@ -14,7 +14,7 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   final FirebaseFirestore _firestore;
 
   TaskRemoteDataSourceImpl({required FirebaseFirestore firestore})
-      : _firestore = firestore;
+    : _firestore = firestore;
 
   CollectionReference<Map<String, dynamic>> _tasksCollection(String userId) =>
       _firestore.collection('users').doc(userId).collection('tasks');
@@ -24,8 +24,10 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
     return _tasksCollection(userId)
         .orderBy('createdAt', descending: true)
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => TaskModel.fromFirestore(doc)).toList());
+        .map(
+          (snapshot) =>
+              snapshot.docs.map((doc) => TaskModel.fromFirestore(doc)).toList(),
+        );
   }
 
   @override
@@ -43,9 +45,9 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   @override
   Future<TaskModel> updateTask(TaskModel task) async {
     try {
-      await _tasksCollection(task.userId)
-          .doc(task.id)
-          .update(task.toFirestore());
+      await _tasksCollection(
+        task.userId,
+      ).doc(task.id).update(task.toFirestore());
       final doc = await _tasksCollection(task.userId).doc(task.id).get();
       return TaskModel.fromFirestore(doc);
     } catch (e) {
@@ -65,9 +67,7 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   @override
   Future<TaskModel> completeTask(String taskId, String userId) async {
     try {
-      await _tasksCollection(userId)
-          .doc(taskId)
-          .update({'isCompleted': true});
+      await _tasksCollection(userId).doc(taskId).update({'isCompleted': true});
       final doc = await _tasksCollection(userId).doc(taskId).get();
       return TaskModel.fromFirestore(doc);
     } catch (e) {

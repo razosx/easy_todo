@@ -43,18 +43,19 @@ class TeamTasksBloc extends Bloc<TeamTasksEvent, TeamTasksState> {
   void _onLoad(LoadTeamTasksRequested event, Emitter<TeamTasksState> emit) {
     emit(TeamTasksLoading());
     _tasksSubscription?.cancel();
-    _tasksSubscription = getTeamTasks(
-      GetTeamTasksParams(teamId: event.teamId),
-    ).listen((result) {
-      result.fold(
-        (failure) => add(TeamTasksStreamErrored(message: failure.message)),
-        (tasks) => add(TeamTasksStreamUpdated(tasks: tasks)),
-      );
-    });
+    _tasksSubscription = getTeamTasks(GetTeamTasksParams(teamId: event.teamId))
+        .listen((result) {
+          result.fold(
+            (failure) => add(TeamTasksStreamErrored(message: failure.message)),
+            (tasks) => add(TeamTasksStreamUpdated(tasks: tasks)),
+          );
+        });
   }
 
   void _onStreamUpdated(
-      TeamTasksStreamUpdated event, Emitter<TeamTasksState> emit) {
+    TeamTasksStreamUpdated event,
+    Emitter<TeamTasksState> emit,
+  ) {
     final assignedToMe = <TeamTaskEntity>[];
     final unassigned = <TeamTaskEntity>[];
     final assignedToOthers = <TeamTaskEntity>[];
@@ -72,21 +73,27 @@ class TeamTasksBloc extends Bloc<TeamTasksEvent, TeamTasksState> {
       }
     }
 
-    emit(TeamTasksLoaded(
-      assignedToMe: assignedToMe,
-      unassigned: unassigned,
-      assignedToOthers: assignedToOthers,
-      completed: completed,
-    ));
+    emit(
+      TeamTasksLoaded(
+        assignedToMe: assignedToMe,
+        unassigned: unassigned,
+        assignedToOthers: assignedToOthers,
+        completed: completed,
+      ),
+    );
   }
 
   void _onStreamErrored(
-      TeamTasksStreamErrored event, Emitter<TeamTasksState> emit) {
+    TeamTasksStreamErrored event,
+    Emitter<TeamTasksState> emit,
+  ) {
     emit(TeamTasksError(message: event.message));
   }
 
   Future<void> _onCreate(
-      CreateTeamTaskRequested event, Emitter<TeamTasksState> emit) async {
+    CreateTeamTaskRequested event,
+    Emitter<TeamTasksState> emit,
+  ) async {
     final result = await createTeamTask(event.task);
     result.fold(
       (failure) => emit(TeamTasksError(message: failure.message)),
@@ -95,7 +102,9 @@ class TeamTasksBloc extends Bloc<TeamTasksEvent, TeamTasksState> {
   }
 
   Future<void> _onAssign(
-      AssignTeamTaskRequested event, Emitter<TeamTasksState> emit) async {
+    AssignTeamTaskRequested event,
+    Emitter<TeamTasksState> emit,
+  ) async {
     final result = await assignTaskToMember(
       AssignTaskParams(
         taskId: event.taskId,
@@ -110,7 +119,9 @@ class TeamTasksBloc extends Bloc<TeamTasksEvent, TeamTasksState> {
   }
 
   Future<void> _onComplete(
-      CompleteTeamTaskRequested event, Emitter<TeamTasksState> emit) async {
+    CompleteTeamTaskRequested event,
+    Emitter<TeamTasksState> emit,
+  ) async {
     final result = await completeTeamTask(
       CompleteTeamTaskParams(taskId: event.taskId, teamId: event.teamId),
     );
@@ -121,7 +132,9 @@ class TeamTasksBloc extends Bloc<TeamTasksEvent, TeamTasksState> {
   }
 
   Future<void> _onDelete(
-      DeleteTeamTaskRequested event, Emitter<TeamTasksState> emit) async {
+    DeleteTeamTaskRequested event,
+    Emitter<TeamTasksState> emit,
+  ) async {
     final result = await deleteTeamTask(
       DeleteTeamTaskParams(taskId: event.taskId, teamId: event.teamId),
     );

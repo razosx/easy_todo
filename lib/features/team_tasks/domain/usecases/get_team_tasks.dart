@@ -5,13 +5,16 @@ import 'package:easy_todo/features/team_tasks/domain/entities/team_task_entity.d
 import 'package:easy_todo/features/team_tasks/domain/repositories/team_task_repository.dart';
 import 'package:equatable/equatable.dart';
 
-class GetTeamTasks extends StreamUseCase<List<TeamTaskEntity>, GetTeamTasksParams> {
+class GetTeamTasks
+    extends StreamUseCase<List<TeamTaskEntity>, GetTeamTasksParams> {
   final TeamTaskRepository repository;
 
   GetTeamTasks(this.repository);
 
   @override
-  Stream<Either<Failure, List<TeamTaskEntity>>> call(GetTeamTasksParams params) {
+  Stream<Either<Failure, List<TeamTaskEntity>>> call(
+    GetTeamTasksParams params,
+  ) {
     return repository.getTeamTasks(params.teamId);
   }
 }

@@ -39,8 +39,8 @@ class HomePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.refresh),
                     onPressed: () => context.read<TasksBloc>().add(
-                          LoadTasksRequested(userId: authState.user.id),
-                        ),
+                      LoadTasksRequested(userId: authState.user.id),
+                    ),
                   ),
                 ],
               ),
@@ -63,7 +63,8 @@ class HomePage extends StatelessWidget {
 
     if (state is TasksLoaded) {
       final l10n = AppLocalizations.of(context)!;
-      final hasAnyTask = state.todayTasks.isNotEmpty ||
+      final hasAnyTask =
+          state.todayTasks.isNotEmpty ||
           state.upcomingTasks.isNotEmpty ||
           state.completedTasks.isNotEmpty;
 
@@ -86,8 +87,8 @@ class HomePage extends StatelessWidget {
               Text(
                 l10n.homeEmptySubtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ),
@@ -104,11 +105,11 @@ class HomePage extends StatelessWidget {
             itemBuilder: (task) => TaskCard(
               task: task,
               onComplete: () => context.read<TasksBloc>().add(
-                    CompleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                CompleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onDelete: () => context.read<TasksBloc>().add(
-                    DeleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                DeleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onTap: () {},
             ),
           ),
@@ -119,11 +120,11 @@ class HomePage extends StatelessWidget {
             itemBuilder: (task) => TaskCard(
               task: task,
               onComplete: () => context.read<TasksBloc>().add(
-                    CompleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                CompleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onDelete: () => context.read<TasksBloc>().add(
-                    DeleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                DeleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onTap: () {},
             ),
           ),
@@ -134,11 +135,11 @@ class HomePage extends StatelessWidget {
             itemBuilder: (task) => TaskCard(
               task: task,
               onComplete: () => context.read<TasksBloc>().add(
-                    CompleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                CompleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onDelete: () => context.read<TasksBloc>().add(
-                    DeleteTaskRequested(taskId: task.id, userId: userId),
-                  ),
+                DeleteTaskRequested(taskId: task.id, userId: userId),
+              ),
               onTap: () {},
             ),
           ),

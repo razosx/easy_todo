@@ -109,8 +109,8 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               Text(
                 l10n.teamNoTeamSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
@@ -156,8 +156,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
 
   Widget _buildTeamScaffold(BuildContext context, TeamEntity team) {
     final authState = context.read<AuthBloc>().state;
-    final userId =
-        authState is AuthAuthenticated ? authState.user.id : '';
+    final userId = authState is AuthAuthenticated ? authState.user.id : '';
 
     return BlocConsumer<TeamTasksBloc, TeamTasksState>(
       listener: (context, state) {
@@ -234,7 +233,8 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
 
     if (state is TeamTasksLoaded) {
       final l10n = AppLocalizations.of(context)!;
-      final hasAny = state.assignedToMe.isNotEmpty ||
+      final hasAny =
+          state.assignedToMe.isNotEmpty ||
           state.unassigned.isNotEmpty ||
           state.assignedToOthers.isNotEmpty ||
           state.completed.isNotEmpty;
@@ -258,8 +258,8 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               Text(
                 l10n.teamEmptyTasksSubtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ),
@@ -277,13 +277,11 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               task: task,
               members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
-                    CompleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
+                CompleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
               onDelete: () => context.read<TeamTasksBloc>().add(
-                    DeleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
+                DeleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
             ),
           ),
           TaskListSection(
@@ -294,15 +292,12 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               task: task,
               members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
-                    CompleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
+                CompleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
               onDelete: () => context.read<TeamTasksBloc>().add(
-                    DeleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
-              onAssign: () =>
-                  _showAssignDialog(context, task.id, team),
+                DeleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
+              onAssign: () => _showAssignDialog(context, task.id, team),
             ),
           ),
           TaskListSection(
@@ -313,15 +308,12 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               task: task,
               members: team.members,
               onComplete: () => context.read<TeamTasksBloc>().add(
-                    CompleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
+                CompleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
               onDelete: () => context.read<TeamTasksBloc>().add(
-                    DeleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
-              onAssign: () =>
-                  _showAssignDialog(context, task.id, team),
+                DeleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
+              onAssign: () => _showAssignDialog(context, task.id, team),
             ),
           ),
           TaskListSection(
@@ -333,9 +325,8 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
               members: team.members,
               onComplete: () {},
               onDelete: () => context.read<TeamTasksBloc>().add(
-                    DeleteTeamTaskRequested(
-                        taskId: task.id, teamId: team.id),
-                  ),
+                DeleteTeamTaskRequested(taskId: task.id, teamId: team.id),
+              ),
             ),
           ),
         ],
@@ -345,8 +336,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
     return const SizedBox.shrink();
   }
 
-  void _showAddTaskSheet(
-      BuildContext context, TeamEntity team, String userId) {
+  void _showAddTaskSheet(BuildContext context, TeamEntity team, String userId) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -376,9 +366,9 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
             Text(
               code,
               style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 8,
-                  ),
+                fontWeight: FontWeight.bold,
+                letterSpacing: 8,
+              ),
             ),
             const SizedBox(height: 8),
             Text(
@@ -398,8 +388,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
     );
   }
 
-  void _showAssignDialog(
-      BuildContext context, String taskId, TeamEntity team) {
+  void _showAssignDialog(BuildContext context, String taskId, TeamEntity team) {
     final l10n = AppLocalizations.of(context)!;
     final memberEntries = team.members.entries.toList();
     showDialog(
@@ -416,23 +405,24 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
                 title: Text(l10n.teamAssignUnassigned),
                 onTap: () {
                   context.read<TeamTasksBloc>().add(
-                        AssignTeamTaskRequested(
-                          taskId: taskId,
-                          teamId: team.id,
-                          assigneeId: null,
-                        ),
-                      );
+                    AssignTeamTaskRequested(
+                      taskId: taskId,
+                      teamId: team.id,
+                      assigneeId: null,
+                    ),
+                  );
                   Navigator.pop(context);
                 },
               ),
               ...memberEntries.map((e) {
-                final displayName =
-                    e.value.username ?? e.value.name ?? e.key;
+                final displayName = e.value.username ?? e.value.name ?? e.key;
                 return ListTile(
                   leading: CircleAvatar(
-                    child: Text(displayName.isNotEmpty
-                        ? displayName[0].toUpperCase()
-                        : '?'),
+                    child: Text(
+                      displayName.isNotEmpty
+                          ? displayName[0].toUpperCase()
+                          : '?',
+                    ),
                   ),
                   title: Text(displayName),
                   subtitle: e.value.role == 'admin'
@@ -440,12 +430,12 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
                       : null,
                   onTap: () {
                     context.read<TeamTasksBloc>().add(
-                          AssignTeamTaskRequested(
-                            taskId: taskId,
-                            teamId: team.id,
-                            assigneeId: e.key,
-                          ),
-                        );
+                      AssignTeamTaskRequested(
+                        taskId: taskId,
+                        teamId: team.id,
+                        assigneeId: e.key,
+                      ),
+                    );
                     Navigator.pop(context);
                   },
                 );
@@ -463,8 +453,7 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
     );
   }
 
-  void _confirmLeave(
-      BuildContext context, String teamId, String userId) {
+  void _confirmLeave(BuildContext context, String teamId, String userId) {
     final l10n = AppLocalizations.of(context)!;
     showDialog(
       context: context,
@@ -479,8 +468,8 @@ class _TeamTasksPageState extends State<TeamTasksPage> {
           FilledButton(
             onPressed: () {
               context.read<TeamBloc>().add(
-                    LeaveTeamRequested(teamId: teamId, userId: userId),
-                  );
+                LeaveTeamRequested(teamId: teamId, userId: userId),
+              );
               Navigator.pop(context);
             },
             child: Text(l10n.teamLeaveButton),

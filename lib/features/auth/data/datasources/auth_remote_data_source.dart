@@ -39,18 +39,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required FirebaseAuth firebaseAuth,
     required GoogleSignIn googleSignIn,
     required FirebaseFirestore firestore,
-  })  : _firebaseAuth = firebaseAuth,
-        _googleSignIn = googleSignIn,
-        _firestore = firestore;
+  }) : _firebaseAuth = firebaseAuth,
+       _googleSignIn = googleSignIn,
+       _firestore = firestore;
 
   Future<UserModel> _fetchProfileFromFirestore(User firebaseUser) async {
-    final doc =
-        await _firestore.collection('users').doc(firebaseUser.uid).get();
+    final doc = await _firestore
+        .collection('users')
+        .doc(firebaseUser.uid)
+        .get();
     if (doc.exists && doc.data() != null) {
-      return UserModel.fromMap({
-        'id': firebaseUser.uid,
-        ...doc.data()!,
-      });
+      return UserModel.fromMap({'id': firebaseUser.uid, ...doc.data()!});
     }
     return UserModel.fromFirebaseUser(firebaseUser);
   }
@@ -83,7 +82,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       final isAvailable = await checkUsernameAvailable(username);
       if (!isAvailable) {
-        throw const AuthException(message: 'El nombre de usuario ya está en uso');
+        throw const AuthException(
+          message: 'El nombre de usuario ya está en uso',
+        );
       }
 
       final credential = await _firebaseAuth.createUserWithEmailAndPassword(
@@ -102,10 +103,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         'username': username,
         'photoUrl': null,
       };
-      await _firestore
-          .collection('users')
-          .doc(firebaseUser.uid)
-          .set(profile);
+      await _firestore.collection('users').doc(firebaseUser.uid).set(profile);
 
       return UserModel.fromMap(profile);
     } on AuthException {
@@ -125,8 +123,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final credential = GoogleAuthProvider.credential(
         idToken: googleAuth.idToken,
       );
-      final userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
       return _fetchProfileFromFirestore(userCredential.user!);
     } on FirebaseAuthException catch (e) {
       throw AuthException(message: e.message ?? 'Google sign in failed');
@@ -138,10 +137,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     try {
-      await Future.wait([
-        _firebaseAuth.signOut(),
-        _googleSignIn.signOut(),
-      ]);
+      await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
     } catch (e) {
       throw ServerException(message: e.toString());
     }

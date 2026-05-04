@@ -11,7 +11,7 @@ class PushNotificationServiceImpl implements PushNotificationService {
   final FirebaseMessaging _messaging;
 
   PushNotificationServiceImpl({FirebaseMessaging? messaging})
-      : _messaging = messaging ?? FirebaseMessaging.instance;
+    : _messaging = messaging ?? FirebaseMessaging.instance;
 
   @override
   Future<bool> requestPermission() async {

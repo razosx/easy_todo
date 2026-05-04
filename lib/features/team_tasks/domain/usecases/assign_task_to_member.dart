@@ -12,7 +12,11 @@ class AssignTaskToMember extends UseCase<TeamTaskEntity, AssignTaskParams> {
 
   @override
   Future<Either<Failure, TeamTaskEntity>> call(AssignTaskParams params) {
-    return repository.assignTask(params.taskId, params.teamId, params.assigneeId);
+    return repository.assignTask(
+      params.taskId,
+      params.teamId,
+      params.assigneeId,
+    );
   }
 }
 

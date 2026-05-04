@@ -48,16 +48,16 @@ class _LoginPageState extends State<LoginPage> {
                   l10n.appTitle,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8),
                 Text(
                   _isSignUp ? l10n.loginCreateAccount : l10n.loginWelcomeBack,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const SizedBox(height: 40),
                 EmailSignInForm(isSignUp: _isSignUp),
@@ -78,9 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                 TextButton(
                   onPressed: () => setState(() => _isSignUp = !_isSignUp),
                   child: Text(
-                    _isSignUp
-                        ? l10n.loginHaveAccount
-                        : l10n.loginNoAccount,
+                    _isSignUp ? l10n.loginHaveAccount : l10n.loginNoAccount,
                   ),
                 ),
               ],

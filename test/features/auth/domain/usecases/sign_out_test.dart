@@ -18,8 +18,9 @@ void main() {
   });
 
   test('should call signOut on repository', () async {
-    when(() => mockRepository.signOut())
-        .thenAnswer((_) async => const Right(null));
+    when(
+      () => mockRepository.signOut(),
+    ).thenAnswer((_) async => const Right(null));
 
     final result = await usecase(const NoParams());
 
@@ -29,8 +30,9 @@ void main() {
   });
 
   test('should return ServerFailure when sign out fails', () async {
-    when(() => mockRepository.signOut())
-        .thenAnswer((_) async => const Left(ServerFailure(message: 'Sign out error')));
+    when(() => mockRepository.signOut()).thenAnswer(
+      (_) async => const Left(ServerFailure(message: 'Sign out error')),
+    );
 
     final result = await usecase(const NoParams());
 

@@ -17,18 +17,9 @@ class AppRouter {
     refreshListenable: GoRouterRefreshStream(_authBloc.stream),
     redirect: _redirect,
     routes: [
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const _LoadingPage(),
-      ),
-      GoRoute(
-        path: '/login',
-        builder: (context, state) => const LoginPage(),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (context, state) => const MainScaffold(),
-      ),
+      GoRoute(path: '/', builder: (context, state) => const _LoadingPage()),
+      GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
+      GoRoute(path: '/home', builder: (context, state) => const MainScaffold()),
     ],
   );
 
@@ -55,9 +46,7 @@ class _LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: CircularProgressIndicator()),
-    );
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 }
 

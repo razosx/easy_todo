@@ -21,8 +21,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this.signUpWithEmail,
     required this.signInWithGoogle,
     required this.signOut,
-  })  : _authRepository = authRepository,
-        super(AuthInitial()) {
+  }) : _authRepository = authRepository,
+       super(AuthInitial()) {
     on<AuthCheckRequested>(_onAuthCheck);
     on<SignInWithEmailRequested>(_onSignInWithEmail);
     on<SignUpWithEmailRequested>(_onSignUpWithEmail);
@@ -43,7 +43,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (_) => emit(AuthAuthenticated(user: firebaseUser)),
       (user) => emit(
-          user != null ? AuthAuthenticated(user: user) : AuthUnauthenticated()),
+        user != null ? AuthAuthenticated(user: user) : AuthUnauthenticated(),
+      ),
     );
   }
 

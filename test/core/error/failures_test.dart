@@ -15,11 +15,14 @@ void main() {
         expect(f1, equals(f2));
       });
 
-      test('two ServerFailures with different messages should not be equal', () {
-        const f1 = ServerFailure(message: 'Error 1');
-        const f2 = ServerFailure(message: 'Error 2');
-        expect(f1, isNot(equals(f2)));
-      });
+      test(
+        'two ServerFailures with different messages should not be equal',
+        () {
+          const f1 = ServerFailure(message: 'Error 1');
+          const f2 = ServerFailure(message: 'Error 2');
+          expect(f1, isNot(equals(f2)));
+        },
+      );
     });
 
     group('CacheFailure', () {

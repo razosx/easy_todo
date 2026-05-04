@@ -26,8 +26,9 @@ void main() {
   });
 
   test('should return stream of tasks from repository', () async {
-    when(() => mockRepository.getTasks(any()))
-        .thenAnswer((_) => Stream.value(Right([tTask])));
+    when(
+      () => mockRepository.getTasks(any()),
+    ).thenAnswer((_) => Stream.value(Right([tTask])));
 
     final result = await usecase(tParams).first;
 
@@ -39,18 +40,22 @@ void main() {
     verify(() => mockRepository.getTasks('user-1')).called(1);
   });
 
-  test('should return stream with ServerFailure when repository fails', () async {
-    when(() => mockRepository.getTasks(any())).thenAnswer(
-        (_) => Stream.value(const Left(ServerFailure(message: 'Error'))));
+  test(
+    'should return stream with ServerFailure when repository fails',
+    () async {
+      when(() => mockRepository.getTasks(any())).thenAnswer(
+        (_) => Stream.value(const Left(ServerFailure(message: 'Error'))),
+      );
 
-    final result = await usecase(tParams).first;
+      final result = await usecase(tParams).first;
 
-    expect(result.isLeft(), isTrue);
-    result.fold(
-      (failure) => expect(failure, const ServerFailure(message: 'Error')),
-      (_) => fail('Expected Left'),
-    );
-  });
+      expect(result.isLeft(), isTrue);
+      result.fold(
+        (failure) => expect(failure, const ServerFailure(message: 'Error')),
+        (_) => fail('Expected Left'),
+      );
+    },
+  );
 
   test('should emit multiple values from stream', () async {
     final tTask2 = TaskEntity(
@@ -70,7 +75,13 @@ void main() {
     final results = await usecase(tParams).toList();
 
     expect(results.length, 2);
-    results[0].fold((_) => fail('Expected Right'), (tasks) => expect(tasks, [tTask]));
-    results[1].fold((_) => fail('Expected Right'), (tasks) => expect(tasks, [tTask, tTask2]));
+    results[0].fold(
+      (_) => fail('Expected Right'),
+      (tasks) => expect(tasks, [tTask]),
+    );
+    results[1].fold(
+      (_) => fail('Expected Right'),
+      (tasks) => expect(tasks, [tTask, tTask2]),
+    );
   });
 }

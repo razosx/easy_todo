@@ -70,8 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '498730641513',
     projectId: 'easytodo-a2ddb',
     storageBucket: 'easytodo-a2ddb.firebasestorage.app',
-    iosClientId: '498730641513-3nrn9q6ndu5iuuqjlvr0upu576thn1qg.apps.googleusercontent.com',
+    iosClientId:
+        '498730641513-3nrn9q6ndu5iuuqjlvr0upu576thn1qg.apps.googleusercontent.com',
     iosBundleId: 'com.ramonito.easyTodo',
   );
-
 }

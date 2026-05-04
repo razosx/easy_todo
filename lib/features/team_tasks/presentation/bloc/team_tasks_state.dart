@@ -26,7 +26,12 @@ class TeamTasksLoaded extends TeamTasksState {
   });
 
   @override
-  List<Object?> get props => [assignedToMe, unassigned, assignedToOthers, completed];
+  List<Object?> get props => [
+    assignedToMe,
+    unassigned,
+    assignedToOthers,
+    completed,
+  ];
 }
 
 class TeamTasksError extends TeamTasksState {

@@ -30,13 +30,13 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
     if (authState is! AuthAuthenticated) return;
 
     context.read<TeamBloc>().add(
-          CreateTeamRequested(
-            name: _nameController.text.trim(),
-            userId: authState.user.id,
-            username: authState.user.username,
-            memberName: authState.user.name,
-          ),
-        );
+      CreateTeamRequested(
+        name: _nameController.text.trim(),
+        userId: authState.user.id,
+        username: authState.user.username,
+        memberName: authState.user.name,
+      ),
+    );
   }
 
   @override
@@ -68,9 +68,8 @@ class _CreateTeamPageState extends State<CreateTeamPage> {
                   Text(
                     l10n.createTeamDescription,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   TextFormField(

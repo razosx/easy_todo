@@ -13,7 +13,11 @@ class JoinTeam extends UseCase<TeamEntity, JoinTeamParams> {
   @override
   Future<Either<Failure, TeamEntity>> call(JoinTeamParams params) {
     return repository.joinTeam(
-        params.inviteCode, params.userId, params.username, params.memberName);
+      params.inviteCode,
+      params.userId,
+      params.username,
+      params.memberName,
+    );
   }
 }
 

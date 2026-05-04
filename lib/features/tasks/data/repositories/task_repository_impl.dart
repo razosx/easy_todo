@@ -13,11 +13,10 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Stream<Either<Failure, List<TaskEntity>>> getTasks(String userId) {
-    return remoteDataSource.getTasks(userId).map<Either<Failure, List<TaskEntity>>>(
-          (tasks) => Right(tasks),
-        ).handleError(
-          (e) => Left(ServerFailure(message: e.toString())),
-        );
+    return remoteDataSource
+        .getTasks(userId)
+        .map<Either<Failure, List<TaskEntity>>>((tasks) => Right(tasks))
+        .handleError((e) => Left(ServerFailure(message: e.toString())));
   }
 
   @override
@@ -54,7 +53,9 @@ class TaskRepositoryImpl implements TaskRepository {
 
   @override
   Future<Either<Failure, TaskEntity>> completeTask(
-      String taskId, String userId) async {
+    String taskId,
+    String userId,
+  ) async {
     try {
       final result = await remoteDataSource.completeTask(taskId, userId);
       return Right(result);
