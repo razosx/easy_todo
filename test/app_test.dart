@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_underscores
+
 import 'dart:async';
 
 import 'package:easy_todo/core/locale/locale_cubit.dart';

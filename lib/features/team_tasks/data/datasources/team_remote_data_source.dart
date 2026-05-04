@@ -51,8 +51,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
           userId: {
             'role': 'admin',
             'joinedAt': Timestamp.fromDate(now),
-            if (username != null) 'username': username,
-            if (memberName != null) 'name': memberName,
+            'username': ?username,
+            'name': ?memberName,
           },
         },
       };
@@ -87,8 +87,8 @@ class TeamRemoteDataSourceImpl implements TeamRemoteDataSource {
         'members.$userId': {
           'role': 'member',
           'joinedAt': Timestamp.fromDate(now),
-          if (username != null) 'username': username,
-          if (memberName != null) 'name': memberName,
+          'username': ?username,
+          'name': ?memberName,
         },
       });
       await _firestore
